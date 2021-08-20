@@ -6,8 +6,8 @@ const NavLink = ({ Icon, page, onClick, active }) => {
         onClick();
       }}
     >
-      <Icon className="mdIcon" />
-      <span>{page}</span>
+      <Icon />
+      <h2>{page}</h2>
     </div>
   );
 };

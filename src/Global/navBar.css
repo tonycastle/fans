@@ -1,10 +1,14 @@
+.navBar {
+  /*flex: 0.3;*/
+  margin-top: 50px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
 .navLink {
   display: flex;
   align-items: center;
   cursor: pointer;
   color: var(--link-color);
-  font-size: 19px;
-  font-weight: 700;
 }
 
 .navLink:hover {
@@ -13,8 +17,26 @@
   border-radius: 30px;
   transition: color 300ms ease-out;
 }
+.navLink > h2 {
+  font-weight: 600;
+  font-size: 19px;
+  margin-right: 20px;
+}
 
-.navLink > .mdIcon {
+.navLink--active {
+  color: var(--link-hover-color);
+}
+
+.navLink > .MuiSvgIcon-root {
   padding: 15px;
-  font-size: 26px;
+  font-size: 30px;
+}
+
+.navBar-new-post {
+  background-color: var(--link-hover-color) !important;
+  border: none !important;
+  color: #fff !important;
+  border-radius: 30px !important;
+  height: 50px !important;
+  margin-top: 20px !important;
 }

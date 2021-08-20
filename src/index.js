@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./Global/global.css";
 import "./Global/navBar.css";
-import NavBar from "./Global/Navbar.js";
+import App from "./App.js";
 
 ReactDOM.render(
   <React.StrictMode>
-    <NavBar />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
