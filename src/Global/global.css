@@ -4,6 +4,7 @@ body {
   --link-color: rgb(131, 135, 148);
   --link-hover-color: rgb(72, 162, 247);
   --link-hover-bg: #ebf5fe;
+  --border-color: #d5dce2;
 
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI",
@@ -15,4 +16,6 @@ body {
 
 .app {
   display: flex;
+  max-width: 1300px;
+  margin: 0px auto 0px auto;
 }

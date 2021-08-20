@@ -8,11 +8,15 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import SubscriptionsOutlinedIcon from "@material-ui/icons/SubscriptionsOutlined";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import { Button } from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
+import "./navBar.css";
 
 const Navbar = () => {
   return (
     <div className="navBar">
+      <Avatar alt="Remy Sharp" src="/broken-image.jpg" className="avatar">
+        T
+      </Avatar>
       <NavLink active page="Home" Icon={HomeIcon} />
       <NavLink page="Explore" Icon={SearchIcon} />
       <NavLink page="Notifications" Icon={NotificationsNoneIcon} />
