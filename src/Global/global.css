@@ -1,0 +1,17 @@
+body {
+
+     /**  FONT AND LINK COLOURS *****************************************/
+  --font-color: #666;
+  --link-color: rgb(131, 135, 148);
+  --link-hover-color: rgb(59, 148, 231);
+  --link-hover-bg: #eBf5fe;
+
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+ 
+}
