@@ -1,16 +1,60 @@
-import { button } from "@material-ui/core";
+import { button, TextField } from "@material-ui/core";
+import "./editProfile.css";
 
 const EditProfile = () => {
   return (
     <div>
       <h2>EDIT PROFILE</h2>
       <button />
-      <form action="submit">
-        <input type="text" name="" id="" />
-        <input type="text" name="" id="" />
-        <input type="text" name="" id="" />
-        <input type="text" name="" id="" />
-        <input type="email" name="" id="" />
+      <form action="submit" className="editProfile">
+        <TextField
+          type="text"
+          label="Username"
+          name=""
+          id=""
+          variant="outlined"
+          fullWidth
+        />
+        <TextField
+          type="text"
+          label="Display name"
+          name=""
+          id=""
+          variant="outlined"
+          fullWidth
+        />
+        <TextField
+          type="text"
+          label="Bio"
+          name=""
+          id=""
+          variant="outlined"
+          fullWidth
+        />
+        <TextField
+          type="text"
+          label="Location"
+          name=""
+          id=""
+          variant="outlined"
+          fullWidth
+        />
+        <TextField
+          type="text"
+          label="Website URL"
+          name=""
+          id=""
+          variant="outlined"
+          fullWidth
+        />
+        <TextField
+          type="text"
+          label="Amazon wishlist"
+          name=""
+          id=""
+          variant="outlined"
+          fullWidth
+        />
       </form>
     </div>
   );

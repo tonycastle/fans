@@ -25,7 +25,7 @@ const Navbar = () => {
         target="/notifications"
       />
       <NavLink page="Messages" Icon={MailOutlineIcon} target="/messages" />
-      <NavLink page="Bookmarks" Icon={BookmarkBorderIcon} taget="/bookmarks" />
+      <NavLink page="Bookmarks" Icon={BookmarkBorderIcon} target="/bookmarks" />
       <NavLink page="Lists" Icon={ListAltIcon} target="/lists" />
       <NavLink
         page="Subscriptions"
