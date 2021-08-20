@@ -17,15 +17,23 @@ const Navbar = () => {
       <Avatar alt="Remy Sharp" src="/broken-image.jpg" className="avatar">
         T
       </Avatar>
-      <NavLink active page="Home" Icon={HomeIcon} />
-      <NavLink page="Explore" Icon={SearchIcon} />
-      <NavLink page="Notifications" Icon={NotificationsNoneIcon} />
-      <NavLink page="Messages" Icon={MailOutlineIcon} />
-      <NavLink page="Bookmarks" Icon={BookmarkBorderIcon} />
-      <NavLink page="Lists" Icon={ListAltIcon} />
-      <NavLink page="Subscriptions" Icon={SubscriptionsOutlinedIcon} />
-      <NavLink page="My profile" Icon={PermIdentityIcon} />
-      <NavLink page="More" Icon={MoreHorizIcon} />
+      <NavLink active page="Home" Icon={HomeIcon} target="/" />
+      <NavLink page="Explore" Icon={SearchIcon} target="explore" />
+      <NavLink
+        page="Notifications"
+        Icon={NotificationsNoneIcon}
+        target="/notifications"
+      />
+      <NavLink page="Messages" Icon={MailOutlineIcon} target="/messages" />
+      <NavLink page="Bookmarks" Icon={BookmarkBorderIcon} taget="/bookmarks" />
+      <NavLink page="Lists" Icon={ListAltIcon} target="/lists" />
+      <NavLink
+        page="Subscriptions"
+        Icon={SubscriptionsOutlinedIcon}
+        target="/subscriptions"
+      />
+      <NavLink page="My profile" Icon={PermIdentityIcon} target="/settings" />
+      <NavLink page="More" Icon={MoreHorizIcon} target="more" />
       <Button variant="outlined" className="navBar-new-post" fullWidth>
         new post
       </Button>

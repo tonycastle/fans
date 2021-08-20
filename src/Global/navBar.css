@@ -8,6 +8,7 @@
   background-color: orangered !important;
   padding: 20px;
   margin: 15px;
+  cursor: pointer;
 }
 .navLink {
   display: flex;
@@ -22,10 +23,15 @@
   border-radius: 30px;
   transition: color 300ms ease-out;
 }
-.navLink > h2 {
+.navLink > a {
   font-weight: 600;
   font-size: 19px;
   margin-right: 20px;
+  color: var(--link-color);
+  text-decoration: none;
+}
+.navLink > a:hover {
+  color: var(--link-hover-color);
 }
 
 .navLink--active {
