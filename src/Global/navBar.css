@@ -1,5 +1,5 @@
 .navBar {
-  flex: 0.2;
+  flex: 0.3;
   padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
@@ -23,18 +23,10 @@
   border-radius: 30px;
   transition: color 300ms ease-out;
 }
-.navLink > a {
-  font-weight: 600;
-  font-size: 19px;
-  margin-right: 20px;
-  color: var(--link-color);
-  text-decoration: none;
-}
-.navLink > a:hover {
-  color: var(--link-hover-color);
-}
 
 .navLink--active {
+  display: flex;
+  align-items: center;
   color: var(--link-hover-color);
 }
 
@@ -48,6 +40,6 @@
   border: none !important;
   color: #fff !important;
   border-radius: 30px !important;
-  height: 50px !important;
+  height: 60px !important;
   margin-top: 20px !important;
 }

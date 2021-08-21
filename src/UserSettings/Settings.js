@@ -2,6 +2,7 @@ import EditProfile from "./EditProfile";
 import EditAccount from "./EditAccount";
 import EditPrivacy from "./EditPrivacy";
 import EditNotifications from "./EditNotifications";
+import { MenuItem, MenuList } from "@material-ui/core";
 
 import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 
@@ -10,10 +11,20 @@ const Settings = () => {
   return (
     <div className="userSettings">
       <h2>User Settings</h2>
-      <Link to={`${match.url}/editprofile`}>Profile</Link>
-      <Link to={`${match.url}/editaccount`}>Account</Link>
-      <Link to={`${match.url}/editprivacy`}>Privacy and safety</Link>
-      <Link to={`${match.url}/editnotifications`}>Notifications</Link>
+      <MenuList>
+        <MenuItem component={Link} to={`${match.url}/editprofile`}>
+          Profile
+        </MenuItem>
+        <MenuItem component={Link} to={`${match.url}/editaccount`}>
+          Account
+        </MenuItem>
+        <MenuItem component={Link} to={`${match.url}/editprivacy`}>
+          Privacy and safety
+        </MenuItem>
+        <MenuItem component={Link} to={`${match.url}/editnotifications`}>
+          Notifications
+        </MenuItem>
+      </MenuList>
       <div className="SettingsContent" id="SettingsContent">
         <Switch>
           <Route exact path={`${match.path}/`}>

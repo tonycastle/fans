@@ -5,7 +5,7 @@ const EditProfile = () => {
   return (
     <div>
       <h2>EDIT PROFILE</h2>
-      <button />
+      <button>Save</button>
       <form action="submit" className="editProfile">
         <TextField
           type="text"

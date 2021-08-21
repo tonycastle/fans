@@ -8,6 +8,7 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import SubscriptionsOutlinedIcon from "@material-ui/icons/SubscriptionsOutlined";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import AddIcon from "@material-ui/icons/Add";
 import { Avatar, Button } from "@material-ui/core";
 import "./navBar.css";
 
@@ -17,24 +18,29 @@ const Navbar = () => {
       <Avatar alt="Remy Sharp" src="/broken-image.jpg" className="avatar">
         T
       </Avatar>
-      <NavLink active page="Home" Icon={HomeIcon} target="/" />
-      <NavLink page="Explore" Icon={SearchIcon} target="explore" />
+      <NavLink activeOnlyWhenExact={true} page="Home" Icon={HomeIcon} to="/" />
+      <NavLink page="Explore" Icon={SearchIcon} to="/explore" />
       <NavLink
         page="Notifications"
         Icon={NotificationsNoneIcon}
-        target="/notifications"
+        to="/notifications"
       />
-      <NavLink page="Messages" Icon={MailOutlineIcon} target="/messages" />
-      <NavLink page="Bookmarks" Icon={BookmarkBorderIcon} target="/bookmarks" />
-      <NavLink page="Lists" Icon={ListAltIcon} target="/lists" />
+      <NavLink page="Messages" Icon={MailOutlineIcon} to="/messages" />
+      <NavLink page="Bookmarks" Icon={BookmarkBorderIcon} to="/bookmarks" />
+      <NavLink page="Lists" Icon={ListAltIcon} to="/lists" />
       <NavLink
         page="Subscriptions"
         Icon={SubscriptionsOutlinedIcon}
-        target="/subscriptions"
+        to="/subscriptions"
       />
-      <NavLink page="My profile" Icon={PermIdentityIcon} target="/settings" />
-      <NavLink page="More" Icon={MoreHorizIcon} target="more" />
-      <Button variant="outlined" className="navBar-new-post" fullWidth>
+      <NavLink page="My profile" Icon={PermIdentityIcon} to="/settings" />
+      <NavLink page="More" Icon={MoreHorizIcon} to="more" />
+      <Button
+        variant="text"
+        className="navBar-new-post"
+        fullWidth
+        startIcon={<AddIcon />}
+      >
         new post
       </Button>
     </div>

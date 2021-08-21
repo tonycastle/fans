@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 
-const NavLink = ({ Icon, page, target, active }) => {
+const NavLink = ({ Icon, page, to, activeOnlyWhenExact }) => {
+  let match = useRouteMatch({ path: to, exact: activeOnlyWhenExact });
   return (
-    // <div className={`navLink ${active && "navLink--active"}`}>
-    <Link to={target} activeClassName="navLink--active">
-      <div className="navLink">
+    <Link to={to} style={{ textDecoration: "none" }}>
+      <div className={`navLink ${match && "navLink--active"}`}>
         <Icon />
-        <span>{page}</span>
+        <h3>{page}</h3>
       </div>
     </Link>
   );
