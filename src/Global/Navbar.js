@@ -18,7 +18,12 @@ const Navbar = () => {
       <Avatar alt="Remy Sharp" src="/broken-image.jpg" className="avatar">
         T
       </Avatar>
-      <NavLink activeOnlyWhenExact={true} page="Home" Icon={HomeIcon} to="/" />
+      <NavLink
+        activeOnlyWhenExact={true}
+        page="Home"
+        Icon={HomeIcon}
+        to="/home"
+      />
       <NavLink page="Explore" Icon={SearchIcon} to="/explore" />
       <NavLink
         page="Notifications"

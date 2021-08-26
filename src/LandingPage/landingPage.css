@@ -1,0 +1,25 @@
+.landingContainer {
+  display: flex;
+  max-width: 1300px;
+  margin: 0px auto 0px auto;
+}
+
+.phoneCol {
+  flex: 0.6;
+  padding-left: 100px;
+}
+
+.formCol {
+  flex: 0.4;
+  padding-right: 100px;
+  align-items: center;
+}
+
+.formCol > Button {
+  background-color: var(--link-hover-color) !important;
+  border: none !important;
+  color: #fff !important;
+  border-radius: 30px !important;
+  height: 60px !important;
+  margin-top: 20px !important;
+}

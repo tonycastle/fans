@@ -1,0 +1,16 @@
+.MuiInputBase-input {
+  height: 12px !important;
+  font-size: 14px !important;
+}
+.TextField {
+  color: orangered;
+}
+
+.userSettings {
+  flex: 0.3;
+  padding-right: 20px;
+}
+.settingsContent {
+  flex: 0.7;
+  padding-left: 20px;
+}
