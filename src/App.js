@@ -1,6 +1,14 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./Home/Home";
+import HomeLayoutRoute from "./HomeLayout/HomeLayoutRoutes";
 import LandingPage from "./LandingPage/LandingPage";
+import Explore from "./Explore/Explore";
+import Notifications from "./Notifications/Notifications";
+import Settings from "./UserSettings/Settings";
+import Messages from "./Messages/Messages";
+import Bookmarks from "./Bookmarks/Bookmarks";
+import Lists from "./Lists/Lists";
+import Subscriptions from "./Subscriptions/Subscriptions";
+import Feed from "./Home/Feed/Feed";
 
 const App = () => {
   return (
@@ -10,9 +18,14 @@ const App = () => {
           <Route exact path="/">
             <LandingPage />
           </Route>
-          <Route exact path="/home">
-            <Home />
-          </Route>
+          <HomeLayoutRoute path="/profile" component={Feed} />
+          <HomeLayoutRoute path="/explore" component={Explore} />
+          <HomeLayoutRoute path="/notifications" component={Notifications} />
+          <HomeLayoutRoute path="/messages" component={Messages} />
+          <HomeLayoutRoute path="/bookmarks" component={Bookmarks} />
+          <HomeLayoutRoute path="/lists" component={Lists} />
+          <HomeLayoutRoute path="/subscriptions" component={Subscriptions} />
+          <HomeLayoutRoute path="/settings" component={Settings} />
         </Switch>
       </div>
     </Router>

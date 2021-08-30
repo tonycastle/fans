@@ -22,7 +22,7 @@ const Navbar = () => {
         activeOnlyWhenExact={true}
         page="Home"
         Icon={HomeIcon}
-        to="/home"
+        to="/profile"
       />
       <NavLink page="Explore" Icon={SearchIcon} to="/explore" />
       <NavLink

@@ -9,41 +9,41 @@ import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import "./settings.css";
 
 const Settings = () => {
-  let match = useRouteMatch();
+  let { path } = useRouteMatch();
   return (
     <>
       <div className="userSettings">
         <h2>User Settings</h2>
         <MenuList>
-          <MenuItem component={Link} to={`${match.url}/editprofile`}>
+          <MenuItem component={Link} to={`${path}/editprofile`}>
             Profile
           </MenuItem>
-          <MenuItem component={Link} to={`${match.url}/editaccount`}>
+          <MenuItem component={Link} to={`${path}/editaccount`}>
             Account
           </MenuItem>
-          <MenuItem component={Link} to={`${match.url}/editprivacy`}>
+          <MenuItem component={Link} to={`${path}/editprivacy`}>
             Privacy and safety
           </MenuItem>
-          <MenuItem component={Link} to={`${match.url}/editnotifications`}>
+          <MenuItem component={Link} to={`${path}/editnotifications`}>
             Notifications
           </MenuItem>
         </MenuList>
       </div>
       <div className="settingsContent" id="SettingsContent">
         <Switch>
-          <Route exact path={`${match.path}/`}>
+          <Route exact path={`${path}/`}>
             <EditProfile />
           </Route>
-          <Route path={`${match.path}/editprofile`}>
+          <Route path={`${path}/editprofile`}>
             <EditProfile />
           </Route>
-          <Route path={`${match.path}/editaccount`}>
+          <Route path={`${path}/editaccount`}>
             <EditAccount />
           </Route>
-          <Route path={`${match.path}/editprivacy`}>
+          <Route path={`${path}/editprivacy`}>
             <EditPrivacy />
           </Route>
-          <Route path={`${match.path}/editnotifications`}>
+          <Route path={`${path}/editnotifications`}>
             <EditNotifications />
           </Route>
         </Switch>
