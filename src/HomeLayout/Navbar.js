@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import NavLink from "./NavLink";
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
@@ -15,7 +16,7 @@ import "./navBar.css";
 const Navbar = () => {
   return (
     <div className="navBar">
-      <Avatar alt="Remy Sharp" src="/broken-image.jpg" className="avatar">
+      <Avatar src="/broken-image.jpg" className="avatar">
         T
       </Avatar>
       <NavLink
@@ -45,6 +46,8 @@ const Navbar = () => {
         className="navBar-new-post"
         fullWidth
         startIcon={<AddIcon />}
+        component={Link}
+        to="/create-post"
       >
         new post
       </Button>

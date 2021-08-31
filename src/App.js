@@ -9,6 +9,7 @@ import Bookmarks from "./Bookmarks/Bookmarks";
 import Lists from "./Lists/Lists";
 import Subscriptions from "./Subscriptions/Subscriptions";
 import Feed from "./Home/Feed/Feed";
+import NewPost from "./Home/Feed/Post/NewPost";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <HomeLayoutRoute path="/lists" component={Lists} />
           <HomeLayoutRoute path="/subscriptions" component={Subscriptions} />
           <HomeLayoutRoute path="/settings" component={Settings} />
+          <HomeLayoutRoute path="/create-post" component={NewPost} />
         </Switch>
       </div>
     </Router>

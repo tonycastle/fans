@@ -1,4 +1,4 @@
-import "post.css";
+import "./post.css";
 
 const Post = () => {
   return <div></div>;
