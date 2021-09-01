@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./HomeLayout/global.css";
+import "./Components/HomeLayout/global.css";
 
 import App from "./App.js";
 

@@ -1,5 +1,5 @@
 //this is the page basically - when you navigate to a different page it is displayed here.
-import Navbar from "../HomeLayout/Navbar";
+import Navbar from "./Navbar";
 
 const Home = (props) => {
   return (

@@ -1,4 +1,4 @@
-import phoneImg from "../images/phones.png";
+import phoneImg from "../../images/phones.png";
 import { TextField, Button, Grid } from "@material-ui/core";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import AddIcon from "@material-ui/icons/Add";

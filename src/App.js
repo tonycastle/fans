@@ -1,15 +1,15 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import HomeLayoutRoute from "./HomeLayout/HomeLayoutRoutes";
-import LandingPage from "./LandingPage/LandingPage";
-import Explore from "./Explore/Explore";
-import Notifications from "./Notifications/Notifications";
-import Settings from "./UserSettings/Settings";
-import Messages from "./Messages/Messages";
-import Bookmarks from "./Bookmarks/Bookmarks";
-import Lists from "./Lists/Lists";
-import Subscriptions from "./Subscriptions/Subscriptions";
-import Feed from "./Home/Feed/Feed";
-import NewPost from "./Home/Feed/Post/NewPost";
+import HomeLayoutRoute from "./Components/HomeLayout/HomeLayoutRoutes";
+import LandingPage from "./Components/LandingPage/LandingPage";
+import Explore from "./Components/Explore/Explore";
+import Notifications from "./Components/Notifications/Notifications";
+import Settings from "./Components/UserSettings/Settings";
+import Messages from "./Components/Messages/Messages";
+import Bookmarks from "./Components/Bookmarks/Bookmarks";
+import Lists from "./Components/Lists/Lists";
+import Subscriptions from "./Components/Subscriptions/Subscriptions";
+import Feed from "./Components/Feed/Feed";
+import NewPost from "./Components/Feed/Post/NewPost";
 
 const App = () => {
   return (
