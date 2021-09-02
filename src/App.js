@@ -9,7 +9,7 @@ import Bookmarks from "./Components/Bookmarks/Bookmarks";
 import Lists from "./Components/Lists/Lists";
 import Subscriptions from "./Components/Subscriptions/Subscriptions";
 import Feed from "./Components/Feed/Feed";
-import NewPost from "./Components/Feed/Post/NewPost";
+import NewPost from "./Components/PostUpload/NewPost";
 
 const App = () => {
   return (
