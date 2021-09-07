@@ -10,6 +10,7 @@ import Lists from "./Components/Lists/Lists";
 import Subscriptions from "./Components/Subscriptions/Subscriptions";
 import Feed from "./Components/Feed/Feed";
 import NewPost from "./Components/PostUpload/NewPost";
+import AddCard from "./Components/Payments/AddCard";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <HomeLayoutRoute path="/subscriptions" component={Subscriptions} />
           <HomeLayoutRoute path="/settings" component={Settings} />
           <HomeLayoutRoute path="/create-post" component={NewPost} />
+          <HomeLayoutRoute path="/addcard" component={AddCard} />
         </Switch>
       </div>
     </Router>

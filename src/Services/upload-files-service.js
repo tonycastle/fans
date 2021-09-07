@@ -1,6 +1,6 @@
 import http from "../http-common";
 
-export const upload = async (file, target, onProgress) => {
+export const upload = async (file, target, onProgress, onComplete) => {
   let formData = new FormData();
   formData.append("file", file);
 
@@ -14,7 +14,7 @@ export const upload = async (file, target, onProgress) => {
         onProgress(Math.round(percentage));
       },
     });
-    console.log(response.data.path);
+    await onComplete(response.data.path);
   } catch (error) {
     console.log(error);
   }
