@@ -1,3 +1,5 @@
+//import { loadStripe } from "@stripe/stripe-js";
+//import { Elements } from "@stripe/react-stripe-js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomeLayoutRoute from "./Components/HomeLayout/HomeLayoutRoutes";
 import LandingPage from "./Components/LandingPage/LandingPage";
@@ -9,8 +11,12 @@ import Bookmarks from "./Components/Bookmarks/Bookmarks";
 import Lists from "./Components/Lists/Lists";
 import Subscriptions from "./Components/Subscriptions/Subscriptions";
 import Feed from "./Components/Feed/Feed";
-import NewPost from "./Components/PostUpload/NewPost";
+import NewPost from "./Components/Posts/NewPost";
 import AddCard from "./Components/Payments/AddCard";
+
+/* const stripePromise = loadStripe(
+  "pk_test_51JWsLSBhgw4Dhe1c4LAkeMkEY5Oww2PwvJ6VSsK2hv2Mv4Uz8hws4oF4fLgNYQqGYW5wkf3bifVVYPfWwD9q2s4u00BpT1znXN"
+); */
 
 const App = () => {
   return (

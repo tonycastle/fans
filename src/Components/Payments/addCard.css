@@ -1,0 +1,8 @@
+.addCardContent > .MuiInputBase-root {
+  background-color: sienna;
+  margin-top: 10px;
+}
+
+.cards {
+  margin-top: 30px;
+}
