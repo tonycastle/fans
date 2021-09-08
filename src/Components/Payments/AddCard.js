@@ -10,7 +10,9 @@ import AddCardForm from "./AddCardForm.js";
 const stripePromise = loadStripe(
   "pk_test_51JWsLSBhgw4Dhe1c4LAkeMkEY5Oww2PwvJ6VSsK2hv2Mv4Uz8hws4oF4fLgNYQqGYW5wkf3bifVVYPfWwD9q2s4u00BpT1znXN"
 );
-
+//TODO - move the get client secret effect from the form to here and then only display the form once we have a secret.
+//means the form cannot be submitted without a secret and the user won't waste time filling in a form if Stripe
+//is unavailable.
 const AddCard = () => {
   return (
     <div className="addCardContent">

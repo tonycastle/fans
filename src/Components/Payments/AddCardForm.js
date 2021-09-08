@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Grid, TextField } from "@material-ui/core";
 import http from "../../http-common";
+import StripeInput from "./StripeInput";
 import {
   useStripe,
   useElements,
@@ -19,7 +20,7 @@ const AddCardForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  //get the client secret needed when we save the card.
+  //get the client secret from the backend - needed when we save the card.
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,6 +34,7 @@ const AddCardForm = () => {
     fetchData();
   }, []);
 
+  //update state variables as form values are changed
   const handleChange = (event) => {
     const { name, value } = event.target;
     const newValue = {};
@@ -40,6 +42,8 @@ const AddCardForm = () => {
     setFormValues((prev) => ({ ...prev, ...newValue }));
   };
 
+  //submit the for mand register the card with Stripe.
+  //TODO: disable the save button so that the form can not be resubmitted until Stripe has responded.
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -132,15 +136,54 @@ const AddCardForm = () => {
           />
         </Grid>
         <Grid item>
-          <CardNumberElement />
+          <TextField
+            label="Credit Card Number"
+            name="ccnumber"
+            variant="outlined"
+            required
+            fullWidth
+            InputLabelProps={{ shrink: true }}
+            InputProps={{
+              inputComponent: StripeInput,
+              inputProps: {
+                component: CardNumberElement,
+              },
+            }}
+          />
         </Grid>
         {/* </Grid> */}
         {/*  <Grid container direction={"row"}> */}
         <Grid item>
-          <CardExpiryElement />
+          <TextField
+            label="Expiration Date"
+            name="ccexp"
+            variant="outlined"
+            required
+            fullWidth
+            InputLabelProps={{ shrink: true }}
+            InputProps={{
+              inputComponent: StripeInput,
+              inputProps: {
+                component: CardExpiryElement,
+              },
+            }}
+          />
         </Grid>
         <Grid item>
-          <CardCvcElement />
+          <TextField
+            label="CVC"
+            name="ccexp"
+            variant="outlined"
+            required
+            fullWidth
+            InputLabelProps={{ shrink: true }}
+            InputProps={{
+              inputComponent: StripeInput,
+              inputProps: {
+                component: CardCvcElement,
+              },
+            }}
+          />
         </Grid>
         <Grid item>
           <button disabled={!stripe || !clientSecret}>Save Card</button>
