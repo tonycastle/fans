@@ -9,15 +9,20 @@ import { useHistory } from "react-router-dom";
 const LoginForm = ({ switchForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
 
   let history = useHistory();
 
   //TODO: figure out what to do with errors - probabky
   //just display a message sayingincorrect credentials.
-  const onSubmit = () => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
     try {
-      http.post("/api/users/login");
-      history.push("/home");
+      let payload = { email, password };
+      const result = await http.post("/api/users/login", payload);
+      result.data.success
+        ? history.push("/profile")
+        : setLoginError(result.data.message);
     } catch (error) {
       console.log(error);
     }
@@ -52,9 +57,11 @@ const LoginForm = ({ switchForm }) => {
             className="signIn"
             fullWidth
             startIcon={<AddIcon />}
+            type="submit"
           >
             Sign in
           </Button>
+          {loginError}
         </Grid>
         <Grid item>
           <p>Don't have an account yet?</p>

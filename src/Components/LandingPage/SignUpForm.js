@@ -9,15 +9,16 @@ import { useHistory } from "react-router-dom";
 const SignUpForm = ({ switchForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [username, setUserName] = useState("");
 
   let history = useHistory();
   //TODO: figure out what to do with errors - probabky
   //just display a message sayingincorrect credentials.
   const onSubmit = async () => {
     try {
-      const res = await http.post("/api/users/register");
-      history.pupsh("/home");
+      let payload = { username, password, email };
+      const res = await http.post("/api/users/register", payload);
+      history.pupsh("/profile");
     } catch (error) {
       console.log(error);
     }
@@ -32,7 +33,7 @@ const SignUpForm = ({ switchForm }) => {
   };
 
   const handleName = (event) => {
-    setName(event.target.value);
+    setUserName(event.target.value);
   };
 
   return (
@@ -57,7 +58,7 @@ const SignUpForm = ({ switchForm }) => {
             label="Name"
             variant="outlined"
             onChange={handleName}
-            value={name}
+            value={username}
             fullWidth
           />
         </Grid>
@@ -67,6 +68,7 @@ const SignUpForm = ({ switchForm }) => {
             className="signIn"
             fullWidth
             startIcon={<AddIcon />}
+            type="submit"
           >
             Sign Up
           </Button>
