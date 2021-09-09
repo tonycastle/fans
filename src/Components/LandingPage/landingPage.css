@@ -23,3 +23,7 @@
   height: 60px !important;
   margin-top: 20px !important;
 }
+
+.passwordField {
+  width: 100%;
+}
