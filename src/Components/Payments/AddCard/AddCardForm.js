@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Grid, TextField } from "@material-ui/core";
-import http from "../../http-common";
-import StripeInput from "./StripeInput";
+import http from "../../../http-common";
+import StripeInput from "../StripeInput";
 import {
   useStripe,
   useElements,
@@ -107,6 +107,8 @@ const AddCardForm = () => {
             label="ZIP/Postal Code"
             value={formValues.postcode}
             onChange={handleChange}
+            required
+            helperText="This field is required"
             fullWidth
           />
         </Grid>

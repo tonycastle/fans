@@ -1,8 +1,8 @@
-import "./addCard.css";
-import visa from "../../images/cards/visa.png";
-import mastercard from "../../images/cards/mastercard.png";
-import jcb from "../../images/cards/jcb.png";
-import maestro from "../../images/cards/maestro.png";
+import "../addCard.css";
+import visa from "../../../images/cards/visa.png";
+import mastercard from "../../../images/cards/mastercard.png";
+import jcb from "../../../images/cards/jcb.png";
+import maestro from "../../../images/cards/maestro.png";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import AddCardForm from "./AddCardForm.js";

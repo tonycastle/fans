@@ -12,7 +12,8 @@ import Lists from "./Components/Lists/Lists";
 import Subscriptions from "./Components/Subscriptions/Subscriptions";
 import Feed from "./Components/Feed/Feed";
 import NewPost from "./Components/Posts/NewPost";
-import AddCard from "./Components/Payments/AddCard";
+import AddCard from "./Components/Payments/AddCard/AddCard";
+import DisplayCards from "./Components/Payments/Cards/DisplayCards";
 
 /* const stripePromise = loadStripe(
   "pk_test_51JWsLSBhgw4Dhe1c4LAkeMkEY5Oww2PwvJ6VSsK2hv2Mv4Uz8hws4oF4fLgNYQqGYW5wkf3bifVVYPfWwD9q2s4u00BpT1znXN"
@@ -35,6 +36,7 @@ const App = () => {
           <HomeLayoutRoute path="/subscriptions" component={Subscriptions} />
           <HomeLayoutRoute path="/settings" component={Settings} />
           <HomeLayoutRoute path="/create-post" component={NewPost} />
+          <HomeLayoutRoute path="/cards" component={DisplayCards} />
           <HomeLayoutRoute path="/addcard" component={AddCard} />
         </Switch>
       </div>
