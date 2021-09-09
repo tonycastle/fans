@@ -10,15 +10,20 @@ const SignUpForm = ({ switchForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUserName] = useState("");
+  const [registerError, setRegisterError] = useState("");
 
   let history = useHistory();
   //TODO: figure out what to do with errors - probabky
   //just display a message sayingincorrect credentials.
-  const onSubmit = async () => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
     try {
       let payload = { username, password, email };
-      const res = await http.post("/api/users/register", payload);
-      history.pupsh("/profile");
+      const response = await http.post("/api/users/register", payload);
+      console.log(response.data);
+      response.data.success
+        ? history.push("/profile")
+        : setRegisterError(response.data.message);
     } catch (error) {
       console.log(error);
     }
@@ -72,6 +77,7 @@ const SignUpForm = ({ switchForm }) => {
           >
             Sign Up
           </Button>
+          {registerError}
         </Grid>
         <Grid item>
           <p>
