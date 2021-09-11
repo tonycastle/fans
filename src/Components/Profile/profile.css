@@ -1,0 +1,83 @@
+.profileContent {
+  position: relative;
+  display: flex;
+  flex: 0.7;
+  flex-direction: column;
+  width: 600px;
+  height: 180px;
+}
+.coverPicture {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 80vh;
+  width: 600px;
+  height: 180px;
+}
+
+.coverPic {
+  position: relative;
+  width: 600px;
+  max-height: 180px;
+  object-fit: cover;
+}
+.profilePic {
+  position: absolute;
+  bottom: -70px;
+  left: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  border: 2px solid #fff;
+}
+.buttonContainer {
+  align-items: flex-end;
+  text-align: right;
+  padding-right: 110px;
+}
+.buttonIcons {
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50px;
+  border: 1px solid rgb(216, 216, 216);
+  margin: 15px 7px 5px 5px;
+  cursor: pointer;
+}
+.buttonIcons:hover {
+  border: 1px solid rgb(86, 176, 250);
+  background-color: rgba(189, 223, 243, 0.3);
+  transition: border 1s, background-color 1s;
+}
+.buttonContainer > .MuiSvgIcon-root {
+  color: rgb(86, 176, 250);
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.displayPostsContainer {
+  width: 600px;
+  background-color: rgb(237, 239, 243);
+  height: 750px;
+}
+
+.subscribeButton {
+  background-color: var(--link-hover-color) !important;
+  border: none !important;
+  color: #fff !important;
+  border-radius: 30px !important;
+  height: 60px !important;
+  width: 80%;
+}
+
+/* .subscribedButton > .MuiSvgIcon-root {
+  padding: 15px;
+  font-size: 30px;
+  color: white;
+} */
+
+h3 {
+  color: #8a96a3;
+}

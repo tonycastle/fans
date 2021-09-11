@@ -13,8 +13,6 @@ const SignUpForm = ({ switchForm }) => {
   const [registerError, setRegisterError] = useState("");
 
   let history = useHistory();
-  //TODO: figure out what to do with errors - probabky
-  //just display a message sayingincorrect credentials.
   const onSubmit = async (e) => {
     e.preventDefault();
     try {

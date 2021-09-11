@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import NavLink from "./NavLink";
-import HomeIcon from "@material-ui/icons/Home";
+import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import SearchIcon from "@material-ui/icons/Search";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
@@ -22,7 +22,7 @@ const Navbar = () => {
       <NavLink
         activeOnlyWhenExact={true}
         page="Home"
-        Icon={HomeIcon}
+        Icon={HomeOutlinedIcon}
         to="/profile"
       />
       <NavLink page="Explore" Icon={SearchIcon} to="/explore" />
