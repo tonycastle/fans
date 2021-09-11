@@ -1,5 +1,3 @@
-//import { loadStripe } from "@stripe/stripe-js";
-//import { Elements } from "@stripe/react-stripe-js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomeLayoutRoute from "./Components/HomeLayout/HomeLayoutRoutes";
 import LandingPage from "./Components/LandingPage/LandingPage";
@@ -16,9 +14,6 @@ import AddCard from "./Components/Payments/AddCard/AddCard";
 import DisplayCards from "./Components/Payments/Cards/DisplayCards";
 import Profile from "./Components/Profile/Profile";
 import "@fontsource/roboto";
-/* const stripePromise = loadStripe(
-  "pk_test_51JWsLSBhgw4Dhe1c4LAkeMkEY5Oww2PwvJ6VSsK2hv2Mv4Uz8hws4oF4fLgNYQqGYW5wkf3bifVVYPfWwD9q2s4u00BpT1znXN"
-); */
 
 const App = () => {
   return (

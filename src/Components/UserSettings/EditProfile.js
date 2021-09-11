@@ -2,18 +2,26 @@ import { fetchUser } from "../../Services/profileService";
 import { Button, TextField, Grid } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import AddAPhotoOutlinedIcon from "@material-ui/icons/AddAPhotoOutlined";
+import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 import "../Profile/profile.css";
 import "./settings.css";
 import http from "../../http-common";
 
 const EditProfile = () => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    username: "",
+    display_name: "",
+    bio: "",
+    location: "",
+    website: "",
+    amazon: "",
+  });
   const [errors, setErrors] = useState("");
   const [confirmation, setConfirmation] = useState(false); //used to show succesful update on submit
 
   //load the users profile
   useEffect(() => {
-    fetchUser(setUser, setErrors);
+    fetchUser(setUser, setErrors, "api/users/getown");
   }, []);
 
   //update state as form is updated
@@ -21,9 +29,11 @@ const EditProfile = () => {
     setUser({ ...user, [prop]: event.target.value });
   };
 
-  const submitForm = async () => {
-    const result = await http.post("api/users/edit", user);
-    user.success ? setConfirmation(true) : console.log(result);
+  const submitForm = async (e) => {
+    e.preventDefault();
+    const result = await http.post("/api/users/edit", user);
+    console.log(result);
+    result.data.success ? setConfirmation(true) : console.log(result);
   };
 
   return (
@@ -56,7 +66,7 @@ const EditProfile = () => {
                 type="text"
                 label="Username"
                 name=""
-                value={user.username ?? ""}
+                value={user.username}
                 onChange={updateFormValues("username")}
                 variant="outlined"
                 fullWidth
@@ -68,7 +78,7 @@ const EditProfile = () => {
                 label="Display name"
                 name=""
                 onChange={updateFormValues("display_name")}
-                value={user.display_name ?? ""}
+                value={user.display_name}
                 variant="outlined"
                 fullWidth
               />
@@ -79,7 +89,7 @@ const EditProfile = () => {
                 label="Bio"
                 name=""
                 onChange={updateFormValues("bio")}
-                value={user.bio ?? ""}
+                value={user.bio}
                 variant="outlined"
                 fullWidth
               />
@@ -90,7 +100,7 @@ const EditProfile = () => {
                 label="Location"
                 name=""
                 onChange={updateFormValues("location")}
-                value={user.location ?? ""}
+                value={user.location}
                 variant="outlined"
                 fullWidth
               />
@@ -101,7 +111,7 @@ const EditProfile = () => {
                 label="Website URL"
                 name=""
                 onChange={updateFormValues("website")}
-                value={user.website ?? ""}
+                value={user.website}
                 variant="outlined"
                 fullWidth
               />
@@ -125,8 +135,17 @@ const EditProfile = () => {
               >
                 Save
               </Button>
+              {confirmation && (
+                <div>
+                  <p>Profile succesfully updated!</p>
+                  <CancelOutlinedIcon
+                    onClick={() => {
+                      setConfirmation(false);
+                    }}
+                  />
+                </div>
+              )}
             </Grid>
-            {confirmation && <p>Profile succesfully updated!</p>}
           </Grid>
         </form>
       )}

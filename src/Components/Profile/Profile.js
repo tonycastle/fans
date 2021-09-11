@@ -20,7 +20,7 @@ const Profile = () => {
   // a profile page is bulit up from their user document and
   // their posts so we get both. baesd on uerId from realfans/profile/:user_id
   useEffect(() => {
-    fetchUser(setUser, setErrors);
+    fetchUser(setUser, setErrors, "api/users/getother");
   }, []);
 
   //bookmarks are just a userid added to the viewprofile url.
