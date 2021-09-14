@@ -72,12 +72,25 @@
   width: 80%;
 }
 
-/* .subscribedButton > .MuiSvgIcon-root {
-  padding: 15px;
-  font-size: 30px;
-  color: white;
-} */
-
 h3 {
   color: #8a96a3;
+}
+
+.fileInput {
+  z-index: 100;
+}
+
+.editCoverPicture {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 80vh;
+  width: 600px;
+  height: 180px;
+}
+.editProfileForm {
+  display: flex;
+  position: relative;
+  margin-top: 80px;
 }

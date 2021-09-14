@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { PostFileUpload } from "./PostFileUpload";
 import CropOriginalIcon from "@material-ui/icons/CropOriginal";
-import { TextareaAutosize } from "@material-ui/core";
+import { TextareaAutosize, TextField, MenuItem } from "@material-ui/core";
 import { v4 as uuidv4 } from "uuid";
 import http from "../../http-common";
 import "./newPost.css";
@@ -10,7 +10,11 @@ import "./newPost.css";
 const NewPost = () => {
   //holds the files dragged into the drop zone.
   const [files, setFiles] = useState([]);
-  const [formValue, setFormValue] = useState("");
+  const [formValues, setFormValues] = useState({
+    post_text: "",
+    post_price: 0,
+    post_access: "free",
+  });
 
   //store the remote file location when the upload is completed
   const onUploadComplete = (id, path) => {
@@ -55,15 +59,15 @@ const NewPost = () => {
   ));
 
   //FORM functions
-  //connect form input to state variable
-  const formUpdate = (e) => {
-    setFormValue(e.target.value);
+  //update state as form is updated
+  const updateFormValues = (prop) => (event) => {
+    setFormValues({ ...formValues, [prop]: event.target.value });
   };
 
   //submit the form
   const formSubmit = async (e) => {
     e.preventDefault();
-    let data = { post_text: formValue, files: files };
+    let data = { ...formValues, files: files };
     try {
       let res = await http.post("/api/posts/create", data);
       console.log(res);
@@ -75,7 +79,11 @@ const NewPost = () => {
   //TODO: this does nt delete already uploaded images - might needto look at that
   const clearForm = () => {
     setFiles([]);
-    setFormValue("");
+    setFormValues({
+      post_text: "",
+      post_price: 0,
+      post_access: "free",
+    });
   };
 
   return (
@@ -97,19 +105,65 @@ const NewPost = () => {
           placeholder={`${
             files.length > 0 ? "Add description here..." : "Enter post text..."
           }`}
-          onChange={formUpdate}
-          value={formValue}
+          onChange={updateFormValues("post_text")}
+          value={formValues.post_text}
         />
         <CropOriginalIcon onClick={open} className="imageSelector" />
         <input {...getInputProps()} name="postFiles" />
       </div>
 
-      <button disabled={files.length < 1 && !formValue} onClick={clearForm}>
+      <button
+        disabled={
+          files.length < 1 &&
+          formValues.post_text !== "" &&
+          formValues.post_price !== 0
+        }
+        onClick={clearForm}
+      >
         clear
       </button>
-      <button disabled={files.length < 1 && !formValue} onClick={formSubmit}>
+      <button
+        disabled={
+          files.length < 1 &&
+          formValues.post_text !== "" &&
+          formValues.post_price !== 0
+        }
+        onClick={formSubmit}
+      >
         post
       </button>
+      <h3>Pay per View</h3>
+      {formValues.post_access == "ppv" && (
+        <span>
+          <p>Enter a price to make the post only accessible on payment.</p>
+          <TextField
+            type="text"
+            label="Price"
+            name="price"
+            onChange={updateFormValues("post_price")}
+            value={formValues.post_price}
+            variant="outlined"
+          />
+        </span>
+      )}
+      <TextField
+        select
+        label="Access"
+        name="access"
+        onChange={updateFormValues("post_access")}
+        value={formValues.post_access}
+        variant="outlined"
+      >
+        <MenuItem key="free" value="free">
+          Free
+        </MenuItem>
+        <MenuItem key="subscribers" value="subscribers">
+          Subscribers
+        </MenuItem>
+        <MenuItem key="ppv" value="ppv">
+          ppv
+        </MenuItem>
+      </TextField>
     </div>
   );
 };
