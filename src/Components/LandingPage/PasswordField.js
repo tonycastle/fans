@@ -6,8 +6,9 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
-const PasswordField = ({ value, onchange }) => {
+const PasswordField = ({ ...props }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => {
@@ -21,12 +22,13 @@ const PasswordField = ({ value, onchange }) => {
   return (
     <>
       <FormControl className="passwordField" variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <InputLabel htmlFor="outlined-adornment-password" error={props.error}>
+          Password
+        </InputLabel>
         <OutlinedInput
           id="outlined-adornment-password"
           type={showPassword ? "text" : "password"}
-          value={value}
-          onChange={onchange}
+          {...props}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -41,6 +43,9 @@ const PasswordField = ({ value, onchange }) => {
           }
           labelWidth={70}
         />
+        <FormHelperText id="component-helper-text" error={props.error}>
+          {props.helperText}
+        </FormHelperText>
       </FormControl>
     </>
   );
