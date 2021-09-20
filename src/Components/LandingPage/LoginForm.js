@@ -35,13 +35,13 @@ const LoginForm = ({ switchForm }) => {
     setFormValues({ ...formValues, [prop]: event.target.value });
   };
 
-  let schema = {
+  let validationSchema = {
     email: yup.string().email().required(),
     password: yup.string().length(6).required(),
   };
 
   const validateFormField = (field) => (e) => {
-    if (!schema[field].isValidSync(e.target.value)) {
+    if (!validationSchema[field].isValidSync(e.target.value)) {
       setFormErrors({ ...formErrors, [field]: true });
     }
   };
@@ -51,6 +51,7 @@ const LoginForm = ({ switchForm }) => {
       <Grid container direction={"column"} spacing={3}>
         <Grid item>
           <TextField
+            id="email-login"
             type="text"
             label="Email"
             variant="outlined"
@@ -60,7 +61,6 @@ const LoginForm = ({ switchForm }) => {
             value={formValues.email}
             fullWidth
             inputProps={{ "data-testid": "email-login" }}
-            required
             helperText={
               formErrors.email ? "Please enter a valid email address" : null
             }
@@ -69,6 +69,7 @@ const LoginForm = ({ switchForm }) => {
         </Grid>
         <Grid item>
           <PasswordField
+            id="password-login"
             value={formValues.password}
             onChange={updateFormValues("password")}
             onBlur={validateFormField("password")}
@@ -80,7 +81,6 @@ const LoginForm = ({ switchForm }) => {
                 ? "Password must be at least 6 characters"
                 : null
             }
-            required
           />
         </Grid>
         <Grid item>
@@ -91,6 +91,10 @@ const LoginForm = ({ switchForm }) => {
             startIcon={<AddIcon />}
             type="submit"
             data-testid="submit-login"
+            disabled={
+              Object.values(formErrors).includes(true) ||
+              Object.values(formValues).includes("")
+            }
           >
             Sign in
           </Button>
