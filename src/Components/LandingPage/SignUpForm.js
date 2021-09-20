@@ -5,18 +5,30 @@ import http from "../../http-common";
 import { useState } from "react";
 import PasswordField from "./PasswordField";
 import { useHistory } from "react-router-dom";
+import * as yup from "yup";
 
 const SignUpForm = ({ switchForm }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUserName] = useState("");
-  const [registerError, setRegisterError] = useState("");
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+    name: "",
+  });
+  const [formErrors, setFormErrors] = useState({
+    email: false,
+    password: false,
+    name: false,
+  });
+  const [registerError, setRegisterError] = useState(false);
 
   let history = useHistory();
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      let payload = { username, password, email };
+      let payload = {
+        username: formValues.name,
+        password: formValues.password,
+        email: formValues.email,
+      };
       const response = await http.post("/api/users/register", payload);
       console.log(response.data);
       response.data.success
@@ -27,16 +39,20 @@ const SignUpForm = ({ switchForm }) => {
     }
   };
 
-  const handlePassword = (event) => {
-    setPassword(event.target.value);
+  const updateFormValues = (prop) => (event) => {
+    setFormValues({ ...formValues, [prop]: event.target.value });
   };
 
-  const handleEmail = (event) => {
-    setEmail(event.target.value);
+  let validationSchema = {
+    email: yup.string().email().required(),
+    password: yup.string().length(6).required(),
+    name: yup.string().required(),
   };
 
-  const handleName = (event) => {
-    setUserName(event.target.value);
+  const validateFormField = (field) => (e) => {
+    if (!validationSchema[field].isValidSync(e.target.value)) {
+      setFormErrors({ ...formErrors, [field]: true });
+    }
   };
 
   return (
@@ -44,25 +60,52 @@ const SignUpForm = ({ switchForm }) => {
       <Grid container direction={"column"} spacing={3}>
         <Grid item>
           <TextField
+            id="email-login"
             type="text"
             label="Email"
             variant="outlined"
-            onChange={handleEmail}
-            value={email}
+            onChange={updateFormValues("email")}
+            onFocus={() => setFormErrors({ ...formErrors, email: false })}
+            error={formErrors.email}
+            value={formValues.email}
             fullWidth
+            inputProps={{ "data-testid": "email-login" }}
+            helperText={
+              formErrors.email ? "Please enter a valid email address" : null
+            }
+            onBlur={validateFormField("email")}
           />
         </Grid>
         <Grid item>
-          <PasswordField value={password} onchange={handlePassword} />
+          <PasswordField
+            id="password-login"
+            value={formValues.password}
+            onChange={updateFormValues("password")}
+            onBlur={validateFormField("password")}
+            onFocus={() => setFormErrors({ ...formErrors, password: false })}
+            error={formErrors.password}
+            inputProps={{ "data-testid": "password-login" }}
+            helperText={
+              formErrors.password
+                ? "Password must be at least 6 characters"
+                : null
+            }
+          />
         </Grid>
         <Grid item>
           <TextField
+            id="name-login"
             type="text"
             label="Name"
             variant="outlined"
-            onChange={handleName}
-            value={username}
+            onChange={updateFormValues("name")}
+            onFocus={() => setFormErrors({ ...formErrors, name: false })}
+            error={formErrors.name}
+            value={formValues.name}
             fullWidth
+            inputProps={{ "data-testid": "name-login" }}
+            helperText={formErrors.name ? "Please enter a name" : null}
+            onBlur={validateFormField("name")}
           />
         </Grid>
         <Grid item>
@@ -72,6 +115,11 @@ const SignUpForm = ({ switchForm }) => {
             fullWidth
             startIcon={<AddIcon />}
             type="submit"
+            data-testid="submit-signup"
+            disabled={
+              Object.values(formErrors).includes(true) ||
+              Object.values(formValues).includes("")
+            }
           >
             Sign Up
           </Button>

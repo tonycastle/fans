@@ -18,7 +18,7 @@ describe("SignUpForm", () => {
       const { getByLabelText, getByTestId } = render(<SignUpForm />);
       const password = getByLabelText("Password");
       const email = getByLabelText("Email");
-      const name = getLabelText("Name");
+      const name = getByLabelText("Name");
       userEvent.type(name, "username");
       userEvent.type(password, "123456");
       userEvent.type(email, "invalid email");
@@ -78,6 +78,7 @@ describe("SignUpForm", () => {
     it("invalid name error should be displayed", () => {
       const { getByLabelText } = render(<SignUpForm />);
       const name = getByLabelText("Name");
+      userEvent.type(name, "");
       name.blur();
       expect(name).toHaveAttribute(
         "aria-invalid",
