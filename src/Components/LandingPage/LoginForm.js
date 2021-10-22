@@ -27,7 +27,9 @@ const LoginForm = ({ switchForm }) => {
         : setLoginError(result.data.message);
     } catch (error) {
       console.log(error);
-      setLoginError(true); //use this to display some sorry something went wrong message
+      setLoginError(
+        "The login service is temporarily unavailable. Please try again later."
+      ); //use this to display some sorry something went wrong message
     }
   };
 
@@ -37,7 +39,7 @@ const LoginForm = ({ switchForm }) => {
 
   let validationSchema = {
     email: yup.string().email().required(),
-    password: yup.string().length(6).required(),
+    password: yup.string().required(),
   };
 
   const validateFormField = (field) => (e) => {

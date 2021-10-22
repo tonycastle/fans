@@ -50,7 +50,7 @@ describe("LoginForm", () => {
       const { getByLabelText, getByTestId } = render(<LoginForm />);
       const password = getByLabelText("Password");
       const email = getByLabelText("Email");
-      userEvent.type(password, "123");
+      userEvent.type(password, "");
       password.blur();
       userEvent.type(email, "test@test.com");
       expect(getByTestId("submit-login")).toBeDisabled();
@@ -59,7 +59,7 @@ describe("LoginForm", () => {
     it("invalid passsword error should be displayed", () => {
       const { getByLabelText } = render(<LoginForm />);
       const password = getByLabelText("Password");
-      userEvent.type(password, "invalid");
+      userEvent.type(password, "");
       password.blur();
       expect(password).toHaveAttribute(
         "aria-invalid",
