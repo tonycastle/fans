@@ -127,7 +127,6 @@ const EditProfile = () => {
                 onChange={updateFormValues("username")}
                 onBlur={validateUsername}
                 variant="outlined"
-                fullWidth
               />
             </Grid>
             <Grid item>
@@ -138,7 +137,6 @@ const EditProfile = () => {
                 onChange={updateFormValues("display_name")}
                 value={user.display_name}
                 variant="outlined"
-                fullWidth
               />
             </Grid>
             <Grid item>
@@ -149,7 +147,6 @@ const EditProfile = () => {
                 onChange={updateFormValues("bio")}
                 value={user.bio}
                 variant="outlined"
-                fullWidth
               />
             </Grid>
             <Grid item>

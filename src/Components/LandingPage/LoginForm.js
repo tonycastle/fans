@@ -6,6 +6,7 @@ import { useState } from "react";
 import PasswordField from "./PasswordField";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
+import { useAuth } from "../../auth-context";
 
 const LoginForm = ({ switchForm }) => {
   const [formValues, setFormValues] = useState({ email: "", password: "" });
@@ -17,13 +18,22 @@ const LoginForm = ({ switchForm }) => {
 
   let history = useHistory();
 
+  const { loginStatus, setLoginStatus } = useAuth();
+
+  const onSuccess = (token) => {
+    sessionStorage.setItem("JWT", JSON.stringify(token));
+    setLoginStatus(true);
+    console.log(loginStatus);
+    history.push("/profile");
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       let payload = { email: formValues.email, password: formValues.password };
       const result = await http.post("/api/users/login", payload);
       result.data.success
-        ? history.push("/profile")
+        ? onSuccess(result.data.token)
         : setLoginError(result.data.message);
     } catch (error) {
       console.log(error);

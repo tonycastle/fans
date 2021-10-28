@@ -26,21 +26,21 @@ const Navbar = () => {
         to="/profile"
       />
       <NavLink page="Explore" Icon={SearchIcon} to="/explore" />
-      <NavLink
+      {/*  <NavLink
         page="Notifications"
         Icon={NotificationsNoneIcon}
         to="/notifications"
-      />
+      /> */}
       <NavLink page="Messages" Icon={MailOutlineIcon} to="/messages" />
-      <NavLink page="Bookmarks" Icon={BookmarkBorderIcon} to="/bookmarks" />
-      <NavLink page="Lists" Icon={ListAltIcon} to="/lists" />
+      {/*  <NavLink page="Bookmarks" Icon={BookmarkBorderIcon} to="/bookmarks" /> */}
+      {/*  <NavLink page="Lists" Icon={ListAltIcon} to="/lists" /> */}
       <NavLink
         page="Subscriptions"
         Icon={SubscriptionsOutlinedIcon}
         to="/subscriptions"
       />
       <NavLink page="My profile" Icon={PermIdentityIcon} to="/settings" />
-      <NavLink page="More" Icon={MoreHorizIcon} to="more" />
+      {/*  <NavLink page="More" Icon={MoreHorizIcon} to="more" /> */}
       <Button
         variant="text"
         className="navBar-new-post"

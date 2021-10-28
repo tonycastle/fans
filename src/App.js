@@ -14,30 +14,33 @@ import AddCard from "./Components/Payments/AddCard/AddCard";
 import DisplayCards from "./Components/Payments/Cards/DisplayCards";
 import Profile from "./Components/Profile/Profile";
 import "@fontsource/roboto";
+import { AuthProvider } from "./auth-context";
 
 const App = () => {
   return (
-    <Router>
-      <div className="app">
-        <Switch>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
-          <HomeLayoutRoute path="/profile" component={Feed} />
-          <HomeLayoutRoute path="/explore" component={Explore} />
-          <HomeLayoutRoute path="/notifications" component={Notifications} />
-          <HomeLayoutRoute path="/messages" component={Messages} />
-          <HomeLayoutRoute path="/bookmarks" component={Bookmarks} />
-          <HomeLayoutRoute path="/lists" component={Lists} />
-          <HomeLayoutRoute path="/subscriptions" component={Subscriptions} />
-          <HomeLayoutRoute path="/settings" component={Settings} />
-          <HomeLayoutRoute path="/create-post" component={NewPost} />
-          <HomeLayoutRoute path="/cards" component={DisplayCards} />
-          <HomeLayoutRoute path="/addcard" component={AddCard} />
-          <HomeLayoutRoute path="/viewprofile" component={Profile} />
-        </Switch>
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className="app">
+          <Switch>
+            <Route exact path="/">
+              <LandingPage />
+            </Route>
+            <HomeLayoutRoute path="/profile" component={Feed} />
+            <HomeLayoutRoute path="/explore" component={Explore} />
+            <HomeLayoutRoute path="/notifications" component={Notifications} />
+            <HomeLayoutRoute path="/messages" component={Messages} />
+            <HomeLayoutRoute path="/bookmarks" component={Bookmarks} />
+            <HomeLayoutRoute path="/lists" component={Lists} />
+            <HomeLayoutRoute path="/subscriptions" component={Subscriptions} />
+            <HomeLayoutRoute path="/settings" component={Settings} />
+            <HomeLayoutRoute path="/create-post" component={NewPost} />
+            <HomeLayoutRoute path="/cards" component={DisplayCards} />
+            <HomeLayoutRoute path="/addcard" component={AddCard} />
+            <HomeLayoutRoute path="/viewprofile" component={Profile} />
+          </Switch>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 };
 
