@@ -15,10 +15,17 @@ import DisplayCards from "./Components/Payments/Cards/DisplayCards";
 import Profile from "./Components/Profile/Profile";
 import "@fontsource/roboto";
 import { AuthProvider } from "./auth-context";
+import { useState } from "react";
 
 const App = () => {
+  const [loginStatus, setLoginStatus] = useState(false);
+  //before we render the router we need to check if there is a loginsession in storage
+  //only do this if the loginstatus is false otherwise will do this every time and loop infiintely
+  !loginStatus &&
+    sessionStorage.getItem("JWT") !== null &&
+    setLoginStatus(true);
   return (
-    <AuthProvider>
+    <AuthProvider loginStatus={loginStatus} setLoginStatus={setLoginStatus}>
       <Router>
         <div className="app">
           <Switch>

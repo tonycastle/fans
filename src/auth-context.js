@@ -2,17 +2,16 @@ import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext({});
 
-export const AuthProvider = (props) => {
-  const [auth, setAuth] = useState(false);
+export const AuthProvider = ({ loginStatus, setLoginStatus, ...rest }) => {
   return (
     <AuthContext.Provider
       value={{
-        loginStatus: auth,
+        loginStatus: loginStatus,
         setLoginStatus: (value) => {
-          setAuth(value);
+          setLoginStatus(value);
         },
       }}
-      {...props}
+      {...rest}
     />
   );
 };
