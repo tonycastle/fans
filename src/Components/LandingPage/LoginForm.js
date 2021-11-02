@@ -6,6 +6,8 @@ import { useState } from "react";
 import PasswordField from "./PasswordField";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
+import { useAuth } from "../../auth-context";
+import jwt_decode from "jwt-decode";
 
 const LoginForm = ({ switchForm }) => {
   const [formValues, setFormValues] = useState({ email: "", password: "" });
@@ -13,17 +15,34 @@ const LoginForm = ({ switchForm }) => {
     email: false,
     password: false,
   });
+
   const [loginError, setLoginError] = useState(false);
 
+  //on receipt of token - store token and save details to auth context before redirecting user to their homepage
   let history = useHistory();
+  const { setLoginStatus } = useAuth();
 
+  const authUser = (token) => {
+    sessionStorage.setItem("authToken", JSON.stringify(token));
+    //get User data from token and save into auth context, in rest of the app we check this exists for auth
+    //and we know which user we are for profile info etc.
+    const decoded_token = jwt_decode(token);
+    console.log(decoded_token);
+    setLoginStatus({
+      userId: decoded_token.id,
+      tokenExpiration: decoded_token.exp,
+    });
+    history.push("/profile");
+  };
+
+  //process the login form
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       let payload = { email: formValues.email, password: formValues.password };
       const result = await http.post("/api/users/login", payload);
       result.data.success
-        ? history.push("/profile")
+        ? authUser(result.data.token)
         : setLoginError(result.data.message);
     } catch (error) {
       console.log(error);

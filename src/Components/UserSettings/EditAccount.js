@@ -3,7 +3,7 @@ import "./settings.css";
 
 const EditAccount = () => {
   return (
-    <div className>
+    <div className="">
       <h2>EDIT ACCOUNT</h2>
       <button>Save</button>
       <form action="submit">

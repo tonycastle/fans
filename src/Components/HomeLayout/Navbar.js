@@ -12,8 +12,21 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import AddIcon from "@material-ui/icons/Add";
 import { Avatar, Button } from "@material-ui/core";
 import "./navBar.css";
+import { useAuth } from "../../auth-context";
 
 const Navbar = () => {
+  const { User, setLoginStatus } = useAuth();
+
+  const logout = () => {
+    //delete JWT token
+    sessionStorage.removeItem("authToken");
+    //setLogin Status to false
+    setLoginStatus({
+      userId: null,
+      tokenExpiration: "",
+    });
+  };
+
   return (
     <div className="navBar">
       <Avatar src="/broken-image.jpg" className="avatar">
@@ -26,21 +39,24 @@ const Navbar = () => {
         to="/profile"
       />
       <NavLink page="Explore" Icon={SearchIcon} to="/explore" />
-      <NavLink
+      {/*  <NavLink
         page="Notifications"
         Icon={NotificationsNoneIcon}
         to="/notifications"
-      />
+      /> */}
       <NavLink page="Messages" Icon={MailOutlineIcon} to="/messages" />
-      <NavLink page="Bookmarks" Icon={BookmarkBorderIcon} to="/bookmarks" />
-      <NavLink page="Lists" Icon={ListAltIcon} to="/lists" />
+      {/*  <NavLink page="Bookmarks" Icon={BookmarkBorderIcon} to="/bookmarks" /> */}
+      {/*  <NavLink page="Lists" Icon={ListAltIcon} to="/lists" /> */}
       <NavLink
         page="Subscriptions"
         Icon={SubscriptionsOutlinedIcon}
         to="/subscriptions"
       />
       <NavLink page="My profile" Icon={PermIdentityIcon} to="/settings" />
-      <NavLink page="More" Icon={MoreHorizIcon} to="more" />
+      <Button variant="text" onClick={logout}>
+        Log out
+      </Button>
+      {/*  <NavLink page="More" Icon={MoreHorizIcon} to="more" /> */}
       <Button
         variant="text"
         className="navBar-new-post"

@@ -133,7 +133,7 @@ const NewPost = () => {
         post
       </button>
       <h3>Pay per View</h3>
-      {formValues.post_access == "ppv" && (
+      {formValues.post_access === "ppv" && (
         <span>
           <p>Enter a price to make the post only accessible on payment.</p>
           <TextField

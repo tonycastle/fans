@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { LinearProgress } from "@material-ui/core";
 import CancelIcon from "@material-ui/icons/Cancel";
 import * as UploadService from "../../Services/upload-files-service";
@@ -7,10 +7,13 @@ export const PostFileUpload = ({ file, onComplete, onDelete }) => {
   const [progress, setProgress] = useState(0);
   const [uploadCompleted, setUploadCompleted] = useState(false);
 
-  let uploadComplete = (path) => {
-    setUploadCompleted(true);
-    onComplete(file.id, path);
-  };
+  let uploadComplete = useCallback(
+    (path) => {
+      setUploadCompleted(true);
+      onComplete(file.id, path);
+    },
+    [file.id, onComplete]
+  );
 
   useEffect(() => {
     UploadService.upload(
@@ -19,7 +22,7 @@ export const PostFileUpload = ({ file, onComplete, onDelete }) => {
       setProgress,
       uploadComplete
     );
-  }, [file]);
+  }, [file, uploadComplete]);
 
   return (
     <div className="thumbContainer">
