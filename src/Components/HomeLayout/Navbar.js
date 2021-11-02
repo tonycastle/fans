@@ -15,13 +15,16 @@ import "./navBar.css";
 import { useAuth } from "../../auth-context";
 
 const Navbar = () => {
-  const { setLoginStatus } = useAuth();
+  const { User, setLoginStatus } = useAuth();
 
   const logout = () => {
     //delete JWT token
-    sessionStorage.removeItem("JWT");
+    sessionStorage.removeItem("authToken");
     //setLogin Status to false
-    setLoginStatus(false);
+    setLoginStatus({
+      userId: null,
+      tokenExpiration: "",
+    });
   };
 
   return (
