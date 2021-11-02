@@ -4,13 +4,13 @@ import Home from "./Home";
 import { useAuth } from "../../auth-context";
 
 const HomeLayoutRoute = ({ component: Component, ...rest }) => {
-  const { loginStatus } = useAuth();
+  const { User } = useAuth();
 
   return (
     <Route
       {...rest}
       render={(props) => {
-        return loginStatus ? (
+        return User.userId ? (
           <Home>
             <Component {...props} />
           </Home>

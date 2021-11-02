@@ -16,16 +16,36 @@ import Profile from "./Components/Profile/Profile";
 import "@fontsource/roboto";
 import { AuthProvider } from "./auth-context";
 import { useState } from "react";
+import jwt_decode from "jwt-decode";
 
 const App = () => {
-  const [loginStatus, setLoginStatus] = useState(false);
-  //before we render the router we need to check if there is a loginsession in storage
-  //only do this if the loginstatus is false otherwise will do this every time and loop infiintely
-  !loginStatus &&
-    sessionStorage.getItem("JWT") !== null &&
-    setLoginStatus(true);
+  const [LoggedInUser, setLoginStatus] = useState({
+    userId: null,
+    tokenExpiration: "",
+  });
+  //before we render the router we need to check if there is a loginsession in storage in case the user has refreshed the page and we have lost the
+  //user auth details frfom the auth conext, if so we have to renew them from the session token
+  //only do this if the userId is null otherwise will do this every time and loop infiintely
+  if (!LoggedInUser.userId) {
+    const token = sessionStorage.getItem("authToken");
+    token !== null &&
+      setLoginStatus({
+        userId: jwt_decode(token).id,
+        tokenExpiration: jwt_decode(token).exp,
+      });
+  }
+  //TODO: add function here to see if current time is greater than token expiration time - if so log the user out and delete the token
+  if (LoggedInUser.userId) {
+    if (Date.now() / 1000 > LoggedInUser.tokenExpiration) {
+      sessionStorage.removeItem("authToken");
+      setLoginStatus({
+        userId: null,
+        tokenExpiration: "",
+      });
+    }
+  }
   return (
-    <AuthProvider loginStatus={loginStatus} setLoginStatus={setLoginStatus}>
+    <AuthProvider User={LoggedInUser} setLoginStatus={setLoginStatus}>
       <Router>
         <div className="app">
           <Switch>
