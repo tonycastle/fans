@@ -1,4 +1,4 @@
-import http from "../http-common";
+import axios from "axios";
 
 export const upload = async (file, target, onProgress, onComplete) => {
   let formData = new FormData();
@@ -18,7 +18,7 @@ export const upload = async (file, target, onProgress, onComplete) => {
   }
 
   try {
-    const response = await http.post(target, formData, options);
+    const response = await axios.post(target, formData, options);
     await onComplete(response.data.path);
   } catch (error) {
     console.log(error);
@@ -26,5 +26,5 @@ export const upload = async (file, target, onProgress, onComplete) => {
 };
 
 export const getFiles = () => {
-  return http.get("/files");
+  return axios.get("/files");
 };

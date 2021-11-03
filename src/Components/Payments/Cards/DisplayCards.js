@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { CreditCardIcon } from "@material-ui/icons/CreditCard";
 import "../addCard.css";
 import { useEffect, useState } from "react";
-import http from "../../../http-common";
+import axios from "axios";
 import Card from "./Card";
 
 const DisplayCards = () => {
@@ -14,7 +14,7 @@ const DisplayCards = () => {
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const res = await http.get("/api/payments/listcards");
+        const res = await axios.get("/api/payments/listcards");
         setCards(res.data);
       } catch (error) {
         setError(error);

@@ -1,13 +1,14 @@
 import { TextField, Button, Grid } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import "./landingPage.css";
-import http from "../../http-common";
+import { setAuthToken } from "../../setAuthTokenHeader";
 import { useState } from "react";
 import PasswordField from "./PasswordField";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { useAuth } from "../../auth-context";
 import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 const LoginForm = ({ switchForm }) => {
   const [formValues, setFormValues] = useState({ email: "", password: "" });
@@ -27,7 +28,7 @@ const LoginForm = ({ switchForm }) => {
     //get User data from token and save into auth context, in rest of the app we check this exists for auth
     //and we know which user we are for profile info etc.
     const decoded_token = jwt_decode(token);
-    console.log(decoded_token);
+    setAuthToken(token);
     setLoginStatus({
       userId: decoded_token.id,
       tokenExpiration: decoded_token.exp,
@@ -40,7 +41,7 @@ const LoginForm = ({ switchForm }) => {
     e.preventDefault();
     try {
       let payload = { email: formValues.email, password: formValues.password };
-      const result = await http.post("/api/users/login", payload);
+      const result = await axios.post("/api/users/login", payload);
       result.data.success
         ? authUser(result.data.token)
         : setLoginError(result.data.message);

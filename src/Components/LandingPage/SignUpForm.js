@@ -1,7 +1,7 @@
 import { TextField, Button, Grid } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import "./landingPage.css";
-import http from "../../http-common";
+import axios from "axios";
 import { useState } from "react";
 import PasswordField from "./PasswordField";
 import { useHistory } from "react-router-dom";
@@ -29,7 +29,7 @@ const SignUpForm = ({ switchForm }) => {
         password: formValues.password,
         email: formValues.email,
       };
-      const response = await http.post("/api/users/register", payload);
+      const response = await axios.post("/api/users/register", payload);
       console.log(response.data);
       response.data.success
         ? history.push("/profile")

@@ -1,4 +1,4 @@
-import http from "../../http-common";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import "./profile.css";
 
@@ -10,7 +10,7 @@ const PostDisplay = () => {
     const fetchPosts = async () => {
       try {
         const payload = { id: "613a4f9bd195b74b2586d05d" };
-        const postData = await http.post("api/posts/allposts", payload); //user is haardcoded for now
+        const postData = await axios.post("api/posts/allposts", payload); //user is haardcoded for now
         postData.data.success
           ? setPosts(postData.data.allPosts)
           : setErrors(postData.data.message); //this will overwrite existing errors need to add instead

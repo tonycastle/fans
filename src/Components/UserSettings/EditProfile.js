@@ -5,7 +5,7 @@ import AddAPhotoOutlinedIcon from "@material-ui/icons/AddAPhotoOutlined";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 import "../Profile/profile.css";
 import "./settings.css";
-import http from "../../http-common";
+import axios from "axios";
 import { upload } from "../../Services/upload-files-service";
 
 const EditProfile = () => {
@@ -41,14 +41,14 @@ const EditProfile = () => {
 
   const submitForm = async (e) => {
     e.preventDefault();
-    const result = await http.post("/api/users/edit", user);
+    const result = await axios.post("/api/users/edit", user);
     console.log(result);
     result.data.success ? setConfirmation(true) : console.log(result);
   };
 
   const validateUsername = async (e) => {
     try {
-      const result = await http.post("/api/users/checkusername", {
+      const result = await axios.post("/api/users/checkusername", {
         username: e.target.value,
       });
       console.log(result);

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Grid, TextField, MenuItem } from "@material-ui/core";
-import http from "../../../http-common";
+import axios from "axios";
 import StripeInput from "../StripeInput";
 import {
   useStripe,
@@ -45,7 +45,7 @@ const AddCardForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await http.get("/api/payments/addcard");
+        const res = await axios.get("/api/payments/addcard");
         setClientSecret(res.data.client_secret);
         console.log(`client secret: ${res.data.client_secret}`);
       } catch (error) {

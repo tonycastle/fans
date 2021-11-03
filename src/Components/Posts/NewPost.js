@@ -4,7 +4,7 @@ import { PostFileUpload } from "./PostFileUpload";
 import CropOriginalIcon from "@material-ui/icons/CropOriginal";
 import { TextareaAutosize, TextField, MenuItem } from "@material-ui/core";
 import { v4 as uuidv4 } from "uuid";
-import http from "../../http-common";
+import axios from "axios";
 import "./newPost.css";
 
 const NewPost = () => {
@@ -69,7 +69,7 @@ const NewPost = () => {
     e.preventDefault();
     let data = { ...formValues, files: files };
     try {
-      let res = await http.post("/api/posts/create", data);
+      let res = await axios.post("/api/posts/create", data);
       console.log(res);
     } catch (error) {
       console.log(error);

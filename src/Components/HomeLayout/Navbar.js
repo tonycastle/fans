@@ -13,6 +13,7 @@ import AddIcon from "@material-ui/icons/Add";
 import { Avatar, Button } from "@material-ui/core";
 import "./navBar.css";
 import { useAuth } from "../../auth-context";
+import { setAuthToken } from "../../setAuthTokenHeader";
 
 const Navbar = () => {
   const { User, setLoginStatus } = useAuth();
@@ -20,7 +21,8 @@ const Navbar = () => {
   const logout = () => {
     //delete JWT token
     sessionStorage.removeItem("authToken");
-    //setLogin Status to false
+    //setLogin Status to
+    setAuthToken(false);
     setLoginStatus({
       userId: null,
       tokenExpiration: "",

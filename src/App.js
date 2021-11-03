@@ -17,6 +17,7 @@ import "@fontsource/roboto";
 import { AuthProvider } from "./auth-context";
 import { useState } from "react";
 import jwt_decode from "jwt-decode";
+import { setAuthToken } from "./setAuthTokenHeader";
 
 const App = () => {
   const [LoggedInUser, setLoginStatus] = useState({
@@ -28,13 +29,17 @@ const App = () => {
   //only do this if the userId is null otherwise will do this every time and loop infiintely
   if (!LoggedInUser.userId) {
     const token = sessionStorage.getItem("authToken");
-    token !== null &&
+    if (token !== null) {
+      setAuthToken(token);
       setLoginStatus({
         userId: jwt_decode(token).id,
         tokenExpiration: jwt_decode(token).exp,
       });
+    }
   }
-  //TODO: add function here to see if current time is greater than token expiration time - if so log the user out and delete the token
+  //Check if token has expired - if so log user out and delete token.
+  //TODO: with this system we can still have the twoken expired n the backend but the user logged in on the front end -
+  //user will only be logged out if they refaresh the site, possible solution is to check expiration time in the route.
   if (LoggedInUser.userId) {
     if (Date.now() / 1000 > LoggedInUser.tokenExpiration) {
       sessionStorage.removeItem("authToken");

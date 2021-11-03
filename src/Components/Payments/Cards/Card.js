@@ -1,13 +1,13 @@
 import moment from "moment";
 import { Grid, Button } from "@material-ui/core";
 import "../addCard.css";
-import http from "../../../http-common";
+import axios from "axios";
 
 const Card = ({ brand, last4, id, created, exp_month, exp_year }) => {
   const deleteCard = async () => {
     try {
       let payload = { id };
-      const response = await http.post("/api/payments/deletecard", payload);
+      const response = await axios.post("/api/payments/deletecard", payload);
       /*  response.data.success
         ? "do whatever we do if it worked"
         : setdeleteError(response.data.message); */
