@@ -14,7 +14,7 @@ import AddCard from "./Components/Payments/AddCard/AddCard";
 import DisplayCards from "./Components/Payments/Cards/DisplayCards";
 import Profile from "./Components/Profile/Profile";
 import "@fontsource/roboto";
-import { AuthProvider } from "./auth-context";
+import { AuthProvider } from "./contexts/auth-context";
 import { useState } from "react";
 import jwt_decode from "jwt-decode";
 import { setAuthToken } from "./setAuthTokenHeader";

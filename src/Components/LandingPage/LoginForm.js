@@ -6,7 +6,7 @@ import { useState } from "react";
 import PasswordField from "./PasswordField";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
-import { useAuth } from "../../auth-context";
+import { useAuth } from "../../contexts/auth-context";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 

@@ -12,7 +12,7 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import AddIcon from "@material-ui/icons/Add";
 import { Avatar, Button } from "@material-ui/core";
 import "./navBar.css";
-import { useAuth } from "../../auth-context";
+import { useAuth } from "../../contexts/auth-context";
 import { setAuthToken } from "../../setAuthTokenHeader";
 
 const Navbar = () => {

@@ -16,4 +16,4 @@ export const AuthProvider = ({ User, setLoginStatus, ...rest }) => {
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const AuthContext;

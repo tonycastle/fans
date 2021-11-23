@@ -1,7 +1,7 @@
 import { Route, Redirect } from "react-router-dom";
 
 import Home from "./Home";
-import { useAuth } from "../../auth-context";
+import { useAuth } from "../../contexts/auth-context";
 
 const HomeLayoutRoute = ({ component: Component, ...rest }) => {
   const { User } = useAuth();
