@@ -1,29 +1,35 @@
-import { fetchUser } from "../../Services/profileService";
+import { useFetchData } from "../../hooks/useFetchData";
 import { Button, TextField, Grid, TextareaAutosize } from "@material-ui/core";
-import { useEffect, useState, useRef } from "react";
+import { useMemo, useState, useRef, useContext } from "react";
 import AddAPhotoOutlinedIcon from "@material-ui/icons/AddAPhotoOutlined";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 import "../Profile/profile.css";
 import "./settings.css";
 import axios from "axios";
 import { upload } from "../../Services/upload-files-service";
+import { AuthContext } from "../../contexts/auth-context";
 
 const EditProfile = () => {
-  const [user, setUser] = useState({
-    username: "",
-    display_name: "",
-    bio: "",
-    location: "",
-    website: "",
-    amazon: "",
-  });
-  const [errors, setErrors] = useState("");
   const [confirmation, setConfirmation] = useState(false); //used to show succesful api update on submit
 
   //load the users profile
-  useEffect(() => {
-    fetchUser(setUser, setErrors, "api/users/getown");
-  }, []);
+  const userId = useContext(AuthContext).User._id;
+  console.log(userId);
+  const userOptions = useMemo(
+    () => ({
+      _id: userId,
+    }),
+    [userId]
+  );
+
+  const [userData, userError, userIsLoading] = useFetchData(
+    "api/users/getown",
+    userOptions
+  );
+  console.log(userError);
+
+  //user State used to control the form
+  const [user, setUser] = useState(userData);
 
   //fileinputs for image uplaods - used so we can reference the invisible file inputs from button onclicks
   const profileInputFileRef = useRef(null);

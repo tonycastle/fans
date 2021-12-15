@@ -37,5 +37,5 @@ export const useFetchData = (dataUrl, options) => {
     };
   }, [dataUrl, options]);
 
-  return [data, fetchError, isLoading];
+  return [data, setData, fetchError, isLoading];
 };

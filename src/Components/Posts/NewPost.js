@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useCallback, useContext } from "react";
+import { AuthContext } from "../../contexts/auth-context";
 import { useDropzone } from "react-dropzone";
 import { PostFileUpload } from "./PostFileUpload";
 import CropOriginalIcon from "@material-ui/icons/CropOriginal";
@@ -10,25 +11,23 @@ import "./newPost.css";
 const NewPost = () => {
   //holds the files dragged into the drop zone.
   const [files, setFiles] = useState([]);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
   const [formValues, setFormValues] = useState({
     post_text: "",
     post_price: 0,
     post_access: "free",
   });
 
-  //store the remote file location when the upload is completed
-  const onUploadComplete = (id, path) => {
-    files.forEach((file) => {
-      if (id === file.id) {
-        Object.assign(file, {
-          remote_location: path,
-        });
-      }
-    });
-  };
+  const [submitDisabled, setSubmitDisabled] = useState(false);
 
-  //this removes the uploaded file from the files array but we
-  // also need to remove it from the server
+  const user = useContext(AuthContext).User;
+
+  //store the remote file location when the upload is completed
+  const onUploadComplete = useCallback((id, path) => {
+    setUploadedFiles((prev) => [...prev, { id: id, remote_location: path }]);
+  }, []);
+
+  // TODO: also need to remove it from the server
   const deleteUploadedFile = (id) => {
     setFiles(files.filter((file) => file.id !== id));
   };
@@ -43,7 +42,9 @@ const NewPost = () => {
           id: uuidv4(),
         })
       );
+      //setSubmitDisabled(true);
       setFiles([...files, ...mappedAcc]); //we can just add new ones as existing uloaders will not rerun due to useEffect
+      console.log("added_image: ", files);
     },
     noClick: true,
   });
@@ -52,7 +53,7 @@ const NewPost = () => {
   const thumbs = files.map((file) => (
     <PostFileUpload
       file={file}
-      key={file.name}
+      key={file.id}
       onComplete={onUploadComplete}
       onDelete={deleteUploadedFile}
     />
@@ -67,13 +68,18 @@ const NewPost = () => {
   //submit the form
   const formSubmit = async (e) => {
     e.preventDefault();
-    let data = { ...formValues, files: files };
+
+    let data = { ...formValues, files: uploadedFiles };
+    console.log(data.files);
+    data.owner_id = user._id;
+    data.owner_username = user.display_name;
     try {
       let res = await axios.post("/api/posts/create", data);
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
+
+    //need to do something here to indicate succesful upload or failure
   };
 
   //TODO: this does nt delete already uploaded images - might needto look at that
@@ -97,7 +103,6 @@ const NewPost = () => {
             <p>Drop files here to upload them</p>
           </div>
         )}
-
         <TextareaAutosize
           name="post_text"
           id="post_text"
@@ -115,8 +120,8 @@ const NewPost = () => {
       <button
         disabled={
           files.length < 1 &&
-          formValues.post_text !== "" &&
-          formValues.post_price !== 0
+          formValues.post_text === "" &&
+          formValues.post_price === 0
         }
         onClick={clearForm}
       >
@@ -125,8 +130,8 @@ const NewPost = () => {
       <button
         disabled={
           files.length < 1 &&
-          formValues.post_text !== "" &&
-          formValues.post_price !== 0
+          formValues.post_text === "" &&
+          formValues.post_price === 0 //|| submitDisabled
         }
         onClick={formSubmit}
       >

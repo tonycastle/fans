@@ -25,6 +25,7 @@ export const PostFileUpload = ({ file, onComplete, onDelete }) => {
   }, [file, uploadComplete]);
 
   return (
+    //show the preview with upload progress bar
     <div className="thumbContainer">
       <img src={file.preview} alt={file.name} />
       {!uploadCompleted && (
@@ -34,12 +35,16 @@ export const PostFileUpload = ({ file, onComplete, onDelete }) => {
           className="uploadProgress"
         />
       )}
-      {uploadCompleted && (
-        <CancelIcon
-          className="deletePostFile"
-          onClick={() => onDelete(file.id)}
-        />
-      )}
+
+      {
+        // if the upload is complete replace the progrtess bar with delete button
+        uploadCompleted && (
+          <CancelIcon
+            className="deletePostFile"
+            onClick={() => onDelete(file.id)}
+          />
+        )
+      }
     </div>
   );
 };

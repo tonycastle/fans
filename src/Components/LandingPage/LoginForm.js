@@ -2,13 +2,14 @@ import { TextField, Button, Grid } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import "./landingPage.css";
 import { setAuthToken } from "../../setAuthTokenHeader";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import PasswordField from "./PasswordField";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
-import { useAuth } from "../../contexts/auth-context";
+import { AuthContext } from "../../contexts/auth-context";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+//import { ContactlessOutlined } from "@material-ui/icons";
 
 const LoginForm = ({ switchForm }) => {
   const [formValues, setFormValues] = useState({ email: "", password: "" });
@@ -21,19 +22,19 @@ const LoginForm = ({ switchForm }) => {
 
   //on receipt of token - store token and save details to auth context before redirecting user to their homepage
   let history = useHistory();
-  const { setLoginStatus } = useAuth();
+  const { setLoginStatus } = useContext(AuthContext);
 
-  const authUser = (token) => {
+  const authUser = (token, user) => {
     sessionStorage.setItem("authToken", JSON.stringify(token));
-    //get User data from token and save into auth context, in rest of the app we check this exists for auth
-    //and we know which user we are for profile info etc.
+    sessionStorage.setItem("user", JSON.stringify(user));
     const decoded_token = jwt_decode(token);
     setAuthToken(token);
     setLoginStatus({
       userId: decoded_token.id,
       tokenExpiration: decoded_token.exp,
+      ...user,
     });
-    history.push("/profile");
+    history.push(`/homepage/`);
   };
 
   //process the login form
@@ -43,10 +44,9 @@ const LoginForm = ({ switchForm }) => {
       let payload = { email: formValues.email, password: formValues.password };
       const result = await axios.post("/api/users/login", payload);
       result.data.success
-        ? authUser(result.data.token)
+        ? authUser(result.data.token, result.data.user)
         : setLoginError(result.data.message);
     } catch (error) {
-      console.log(error);
       setLoginError(
         "The login service is temporarily unavailable. Please try again later."
       ); //use this to display some sorry something went wrong message

@@ -1,14 +1,11 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomeLayoutRoute from "./Components/HomeLayout/HomeLayoutRoutes";
 import LandingPage from "./Components/LandingPage/LandingPage";
-import Explore from "./Components/Explore/Explore";
 import Notifications from "./Components/Notifications/Notifications";
 import Settings from "./Components/UserSettings/Settings";
 import Messages from "./Components/Messages/Messages";
 import Bookmarks from "./Components/Bookmarks/Bookmarks";
-import Lists from "./Components/Lists/Lists";
-import Subscriptions from "./Components/Subscriptions/Subscriptions";
-import Feed from "./Components/Feed/Feed";
+import HomePage from "./Components/HomePage/HomePage";
 import NewPost from "./Components/Posts/NewPost";
 import AddCard from "./Components/Payments/AddCard/AddCard";
 import DisplayCards from "./Components/Payments/Cards/DisplayCards";
@@ -18,11 +15,13 @@ import { AuthProvider } from "./contexts/auth-context";
 import { useState } from "react";
 import jwt_decode from "jwt-decode";
 import { setAuthToken } from "./setAuthTokenHeader";
+import Post from "./Components/HomePage/Post";
 
 const App = () => {
   const [LoggedInUser, setLoginStatus] = useState({
     userId: null,
     tokenExpiration: "",
+    user: null,
   });
   //before we render the router we need to check if there is a loginsession in storage in case the user has refreshed the page and we have lost the
   //user auth details frfom the auth conext, if so we have to renew them from the session token
@@ -34,6 +33,7 @@ const App = () => {
       setLoginStatus({
         userId: jwt_decode(token).id,
         tokenExpiration: jwt_decode(token).exp,
+        ...JSON.parse(sessionStorage.getItem("user")), //this is breaking need to deserialize the object
       });
     }
   }
@@ -43,9 +43,11 @@ const App = () => {
   if (LoggedInUser.userId) {
     if (Date.now() / 1000 > LoggedInUser.tokenExpiration) {
       sessionStorage.removeItem("authToken");
+      sessionStorage.removeItem("user");
       setLoginStatus({
         userId: null,
         tokenExpiration: "",
+        user: null,
       });
     }
   }
@@ -57,13 +59,12 @@ const App = () => {
             <Route exact path="/">
               <LandingPage />
             </Route>
-            <HomeLayoutRoute path="/profile" component={Feed} />
-            <HomeLayoutRoute path="/explore" component={Explore} />
+            <HomeLayoutRoute path="/homepage" component={HomePage} />
+            <HomeLayoutRoute path="/post/:id" component={Post} />
+            <HomeLayoutRoute path="/profile" component={Profile} />
             <HomeLayoutRoute path="/notifications" component={Notifications} />
             <HomeLayoutRoute path="/messages" component={Messages} />
             <HomeLayoutRoute path="/bookmarks" component={Bookmarks} />
-            <HomeLayoutRoute path="/lists" component={Lists} />
-            <HomeLayoutRoute path="/subscriptions" component={Subscriptions} />
             <HomeLayoutRoute path="/settings" component={Settings} />
             <HomeLayoutRoute path="/create-post" component={NewPost} />
             <HomeLayoutRoute path="/cards" component={DisplayCards} />

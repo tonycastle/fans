@@ -1,19 +1,20 @@
 import { Route, Redirect } from "react-router-dom";
+import { useContext } from "react";
 
-import Home from "./Home";
-import { useAuth } from "../../contexts/auth-context";
+import PageContainer from "./PageContainer";
+import { AuthContext } from "../../contexts/auth-context";
 
 const HomeLayoutRoute = ({ component: Component, ...rest }) => {
-  const { User } = useAuth();
+  const { User } = useContext(AuthContext);
 
   return (
     <Route
       {...rest}
       render={(props) => {
         return User.userId ? (
-          <Home>
+          <PageContainer>
             <Component {...props} />
-          </Home>
+          </PageContainer>
         ) : (
           <Redirect to="/" />
         );

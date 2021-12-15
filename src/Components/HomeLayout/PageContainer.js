@@ -1,7 +1,7 @@
 //this is the page basically - when you navigate to a different page it is displayed here.
 import Navbar from "./Navbar";
 
-const Home = (props) => {
+const PageContainer = (props) => {
   return (
     <>
       <Navbar />
@@ -10,4 +10,4 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+export default PageContainer;

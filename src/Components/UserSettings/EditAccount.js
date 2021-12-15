@@ -1,11 +1,11 @@
-import { button, TextField, Grid } from "@material-ui/core";
+import { Button, TextField, Grid } from "@material-ui/core";
 import "./settings.css";
 
 const EditAccount = () => {
   return (
     <div className="">
       <h2>EDIT ACCOUNT</h2>
-      <button>Save</button>
+      <Button>Save</Button>
       <form action="submit">
         <Grid container direction={"column"} spacing={5}>
           <Grid item>
