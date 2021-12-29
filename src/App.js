@@ -16,6 +16,7 @@ import { useState } from "react";
 import jwt_decode from "jwt-decode";
 import { setAuthToken } from "./setAuthTokenHeader";
 import Post from "./Components/HomePage/Post";
+import ProfilePost from "./Components/Profile/ProfilePost";
 
 const App = () => {
   const [LoggedInUser, setLoginStatus] = useState({
@@ -29,7 +30,7 @@ const App = () => {
   if (!LoggedInUser.userId) {
     const token = sessionStorage.getItem("authToken");
     if (token !== null) {
-      setAuthToken(token);
+      setAuthToken(token); //TODO: check why this doesn't work
       setLoginStatus({
         userId: jwt_decode(token).id,
         tokenExpiration: jwt_decode(token).exp,
@@ -60,10 +61,11 @@ const App = () => {
               <LandingPage />
             </Route>
             <HomeLayoutRoute path="/homepage" component={HomePage} />
-            <HomeLayoutRoute path="/post/:id" component={Post} />
-            <HomeLayoutRoute path="/profile" component={Profile} />
+            <HomeLayoutRoute path="/post/:id" component={ProfilePost} />
+            <HomeLayoutRoute exact path="/profile/:id" component={Profile} />
+            <HomeLayoutRoute path="/ownpost/:id" component={Post} />
             <HomeLayoutRoute path="/notifications" component={Notifications} />
-            <HomeLayoutRoute path="/messages" component={Messages} />
+            <HomeLayoutRoute path="/messages/:id" component={Messages} />
             <HomeLayoutRoute path="/bookmarks" component={Bookmarks} />
             <HomeLayoutRoute path="/settings" component={Settings} />
             <HomeLayoutRoute path="/create-post" component={NewPost} />

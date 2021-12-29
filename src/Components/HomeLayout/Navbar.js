@@ -22,6 +22,7 @@ const Navbar = () => {
   const logout = () => {
     //delete JWT token
     sessionStorage.removeItem("authToken");
+    sessionStorage.removeItem("user");
     //setLogin Status to
     setAuthToken(false);
     setLoginStatus({

@@ -1,21 +1,9 @@
-import moment from "moment";
 import { Grid, Button } from "@material-ui/core";
 import "../addCard.css";
-import axios from "axios";
+import DayJS from "react-dayjs";
 
-const Card = ({ brand, last4, id, created, exp_month, exp_year }) => {
-  const deleteCard = async () => {
-    try {
-      let payload = { id };
-      const response = await axios.post("/api/payments/deletecard", payload);
-      /*  response.data.success
-        ? "do whatever we do if it worked"
-        : setdeleteError(response.data.message); */
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+const Card = ({ brand, id, last4, created, exp_month, exp_year, onDelete }) => {
+  exp_month < 10 && (exp_month = "0" + exp_month); //fix month formatting
   return (
     <div className="displayedCard">
       <Grid container direction={"row"}>
@@ -24,9 +12,16 @@ const Card = ({ brand, last4, id, created, exp_month, exp_year }) => {
         </Grid>
         <Grid item>
           <p>Card: xxxx-xxxx-xxxx-{last4}</p>
-          <p>Card Added: {moment(created * 1000).format("DD-MM-YYYY")}</p>
+          <p>
+            Card Added: <DayJS format="DD-MM-YYYY">{created * 1000}</DayJS>
+          </p>
           <p>Expires: {`${exp_month}-${exp_year}`}</p>
-          <Button className="deleteCard" onClick={deleteCard}>
+          <Button
+            className="deleteCard"
+            onClick={() => {
+              onDelete(id);
+            }}
+          >
             delete
           </Button>
         </Grid>

@@ -1,17 +1,21 @@
 import { useFetchData } from "../../hooks/useFetchData";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useParams } from "react-router";
 import { CircularProgress } from "@material-ui/core";
 import { Button } from "@material-ui/core";
+import ConfirmationDialogue from "../Utilities/ConfirmationDialogue";
 //import axios from "axios";
 
 const Post = () => {
   const { id } = useParams();
   const payload = useMemo(() => ({ id: id }), [id]);
   const [Post, setPost, PostError, isLoading] = useFetchData(
-    "/api/posts/post",
+    "/api/posts/ownpost",
     payload
   );
+
+  const [dialogueVisibility, setDialogueVisibility] = useState(false);
+  const [selectedFile, setSelectedFile] = useState("");
 
   const deleteImage = (id) => {
     //filter the image out of the files array in the post
@@ -42,16 +46,36 @@ const Post = () => {
       ) : (
         <div>
           <p>{Post.post_text}</p>
+          <p>Views: {Post.views || 0}</p>
           <p>Access Type: {Post.post_access || 0}</p>
           <p>Likes: {Post.likes.count || 0}</p>
           <p>Subscribers: {Post.subscribers.length}</p>
           <div>
+            <ConfirmationDialogue
+              isVisible={dialogueVisibility}
+              cancelAction={() => {
+                setDialogueVisibility(false);
+              }}
+              confirmAction={() => {
+                deleteImage(selectedFile);
+                setDialogueVisibility(false);
+              }}
+              title="Confirm image deletion"
+              text="Press delete to permanently delete this image"
+              confirmText="delete"
+              cancelText="cancel"
+            />
             {Post.files.length > 0 ? (
-              <div className="PostFilesContainer">
+              <div>
                 {Post.files.map((file) => {
                   return (
-                    <div className="PostFile" key={file.id}>
-                      <Button onClick={() => deleteImage(file.id)}>
+                    <div key={file.id}>
+                      <Button
+                        onClick={() => {
+                          setSelectedFile(file.id);
+                          setDialogueVisibility(true);
+                        }}
+                      >
                         delete image
                       </Button>
                       <img src={`/images/${file.remote_location}`} alt="" />

@@ -32,7 +32,7 @@ const SignUpForm = ({ switchForm }) => {
       const response = await axios.post("/api/users/register", payload);
       console.log(response.data);
       response.data.success
-        ? history.push("/profile")
+        ? history.push("/homepage")
         : setRegisterError(response.data.message);
     } catch (error) {
       console.log(error);

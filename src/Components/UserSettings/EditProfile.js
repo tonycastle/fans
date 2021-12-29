@@ -1,5 +1,4 @@
 import { useFetchData } from "../../hooks/useFetchData";
-import { Button, TextField, Grid, TextareaAutosize } from "@material-ui/core";
 import { useMemo, useState, useRef, useContext } from "react";
 import AddAPhotoOutlinedIcon from "@material-ui/icons/AddAPhotoOutlined";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
@@ -8,28 +7,25 @@ import "./settings.css";
 import axios from "axios";
 import { upload } from "../../Services/upload-files-service";
 import { AuthContext } from "../../contexts/auth-context";
+import ProfileForm from "./ProfileForm";
+import { CircularProgress } from "@material-ui/core";
 
 const EditProfile = () => {
   const [confirmation, setConfirmation] = useState(false); //used to show succesful api update on submit
 
   //load the users profile
   const userId = useContext(AuthContext).User._id;
-  console.log(userId);
   const userOptions = useMemo(
     () => ({
-      _id: userId,
+      id: userId,
     }),
     [userId]
   );
 
-  const [userData, userError, userIsLoading] = useFetchData(
-    "api/users/getown",
+  const [user, setUser, userError, userIsLoading] = useFetchData(
+    "/api/users/getown",
     userOptions
   );
-  console.log(userError);
-
-  //user State used to control the form
-  const [user, setUser] = useState(userData);
 
   //fileinputs for image uplaods - used so we can reference the invisible file inputs from button onclicks
   const profileInputFileRef = useRef(null);
@@ -81,134 +77,68 @@ const EditProfile = () => {
   return (
     <div>
       <h2>EDIT PROFILE</h2>
-      <div className="profileContent">
-        <div className="editCoverPicture">
-          {user.coverPicture !== "" && (
-            <img
-              src={`/images/${user.coverPicture}`}
-              alt=""
-              className="coverPic"
+      {userIsLoading ? (
+        <CircularProgress />
+      ) : userError ? (
+        <p>Oops! Shit is fucked up!</p>
+      ) : (
+        <div className="profileContent">
+          <div className="editCoverPicture">
+            {user.coverPicture !== "" && (
+              <img
+                src={`/images/${user.coverPicture}`}
+                alt=""
+                className="coverPic"
+              />
+            )}
+            <AddAPhotoOutlinedIcon
+              onClick={() => onBtnClick(coverInputFileRef)}
             />
-          )}
-          <AddAPhotoOutlinedIcon
-            onClick={() => onBtnClick(coverInputFileRef)}
-          />
-          <input
-            name="coverUpload"
-            type="file"
-            accept=".jpeg,image/jpeg,image/pjpeg,.jpg,.gif,image/gif,.png,image/png,image/x-png"
-            className="fileInput"
-            ref={coverInputFileRef}
-            onChange={updateCoverPicture}
-          ></input>
-          {user.profilePicture !== "" && (
-            <img
-              src={`/images/${user.profilePicture}`}
-              alt=""
-              className="profilePic"
+            <input
+              name="coverUpload"
+              type="file"
+              accept=".jpeg,image/jpeg,image/pjpeg,.jpg,.gif,image/gif,.png,image/png,image/x-png"
+              className="fileInput"
+              ref={coverInputFileRef}
+              onChange={updateCoverPicture}
+            ></input>
+            {user.profilePicture !== "" && (
+              <img
+                src={`/images/${user.profilePicture}`}
+                alt=""
+                className="profilePic"
+              />
+            )}
+            <AddAPhotoOutlinedIcon
+              onClick={() => onBtnClick(profileInputFileRef)}
             />
-          )}
-          <AddAPhotoOutlinedIcon
-            onClick={() => onBtnClick(profileInputFileRef)}
+            <input
+              name="profileUpload"
+              type="file"
+              accept=".jpeg,image/jpeg,image/pjpeg,.jpg,.gif,image/gif,.png,image/png,image/x-png"
+              className="fileInput"
+              ref={profileInputFileRef}
+              onChange={updateProfilePicture}
+            ></input>
+          </div>
+          <ProfileForm
+            user={user}
+            submitForm={submitForm}
+            validateUsername={validateUsername}
+            updateFormValues={updateFormValues}
           />
-          <input
-            name="profileUpload"
-            type="file"
-            accept=".jpeg,image/jpeg,image/pjpeg,.jpg,.gif,image/gif,.png,image/png,image/x-png"
-            className="fileInput"
-            ref={profileInputFileRef}
-            onChange={updateProfilePicture}
-          ></input>
         </div>
-      </div>
-      {user && (
-        <form action="submit" className="editProfileForm">
-          <Grid container direction={"column"} spacing={5}>
-            <Grid item>
-              <TextField
-                type="text"
-                label="Username"
-                name=""
-                value={user.username}
-                onChange={updateFormValues("username")}
-                onBlur={validateUsername}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                type="text"
-                label="Display name"
-                name=""
-                onChange={updateFormValues("display_name")}
-                value={user.display_name}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item>
-              <TextareaAutosize
-                type="text"
-                label="Bio"
-                name=""
-                onChange={updateFormValues("bio")}
-                value={user.bio}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                type="text"
-                label="Location"
-                name=""
-                onChange={updateFormValues("location")}
-                value={user.location}
-                variant="outlined"
-                fullWidth
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                type="text"
-                label="Website URL"
-                name=""
-                onChange={updateFormValues("website")}
-                value={user.website}
-                variant="outlined"
-                fullWidth
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                type="text"
-                label="Amazon wishlist"
-                name=""
-                onChange={updateFormValues("amazon")}
-                value={user.amazon}
-                variant="outlined"
-                fullWidth
-              />
-            </Grid>
-            <Grid item>
-              <Button
-                onClick={submitForm}
-                variant="contained"
-                className="submitEditButton"
-              >
-                Save
-              </Button>
-              {confirmation && (
-                <div>
-                  <p>Profile succesfully updated!</p>
-                  <CancelOutlinedIcon
-                    onClick={() => {
-                      setConfirmation(false);
-                    }}
-                  />
-                </div>
-              )}
-            </Grid>
-          </Grid>
-        </form>
+      )}
+
+      {confirmation && (
+        <div>
+          <p>Profile succesfully updated!</p>
+          <CancelOutlinedIcon
+            onClick={() => {
+              setConfirmation(false);
+            }}
+          />
+        </div>
       )}
     </div>
   );

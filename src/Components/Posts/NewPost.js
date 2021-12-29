@@ -18,7 +18,7 @@ const NewPost = () => {
     post_access: "free",
   });
 
-  const [submitDisabled, setSubmitDisabled] = useState(false);
+  //const [submitDisabled, setSubmitDisabled] = useState(false);
 
   const user = useContext(AuthContext).User;
 
@@ -75,6 +75,7 @@ const NewPost = () => {
     data.owner_username = user.display_name;
     try {
       let res = await axios.post("/api/posts/create", data);
+      console.log(res);
     } catch (error) {
       console.log(error);
     }

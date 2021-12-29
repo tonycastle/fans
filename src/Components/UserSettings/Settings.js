@@ -2,6 +2,7 @@ import EditProfile from "./EditProfile";
 import EditAccount from "./EditAccount";
 import EditPrivacy from "./EditPrivacy";
 import EditNotifications from "./EditNotifications";
+import DisplayCards from "../Payments/Cards/DisplayCards";
 import { MenuItem, MenuList } from "@material-ui/core";
 
 import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
@@ -27,6 +28,9 @@ const Settings = () => {
           <MenuItem component={Link} to={`${path}/editnotifications`}>
             Notifications
           </MenuItem>
+          <MenuItem component={Link} to={`${path}/displaycards`}>
+            Payment Cards
+          </MenuItem>
         </MenuList>
       </div>
       <div className="settingsContent" id="SettingsContent">
@@ -45,6 +49,9 @@ const Settings = () => {
           </Route>
           <Route path={`${path}/editnotifications`}>
             <EditNotifications />
+          </Route>
+          <Route path={`${path}/displaycards`}>
+            <DisplayCards />
           </Route>
         </Switch>
       </div>
