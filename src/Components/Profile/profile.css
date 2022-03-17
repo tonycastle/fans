@@ -58,9 +58,9 @@
 }
 
 .displayPostsContainer {
-  width: 600px;
+  width: 100%;
   background-color: rgb(237, 239, 243);
-  height: 750px;
+  height: 100%x;
 }
 
 .subscribeButton {

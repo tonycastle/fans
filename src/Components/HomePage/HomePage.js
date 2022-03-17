@@ -34,14 +34,14 @@ const HomePage = () => {
     <div className="homepage">
       <div className="homepage-header">
         <h2>Your Posts</h2>
-        {PostsAreLoading ? (
-          <CircularProgress />
-        ) : PostErrors ? (
-          <p>{`Oops! - Something went wrong! :( ${PostErrors}`}</p>
-        ) : (
-          <PostList posts={Posts} deletePost={deletePost} />
-        )}
       </div>
+      {PostsAreLoading ? (
+        <CircularProgress />
+      ) : PostErrors ? (
+        <p>{`Oops! - Something went wrong! :( ${PostErrors}`}</p>
+      ) : (
+        <PostList posts={Posts} deletePost={deletePost} />
+      )}
     </div>
   );
 };

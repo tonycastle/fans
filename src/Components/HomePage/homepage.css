@@ -1,4 +1,4 @@
-.feed {
+/* .feed {
   flex: 0.5;
   border-right: 1px solid var(--border-color);
   border-left: 1px solid var(--border-color);
@@ -26,11 +26,14 @@
 .feed-header > h2 {
   font-size: 20px;
   font-weight: 600;
-}
+} */
 .PostListPost {
-  border: 1px solid rgb(163, 190, 221);
   background: rgb(186, 210, 238);
-  padding: 15px;
+  padding: 0px;
   margin: 10px 0px 10px 0px;
+  width: 100%;
+}
+
+.postListThumbImage {
   width: 100%;
 }

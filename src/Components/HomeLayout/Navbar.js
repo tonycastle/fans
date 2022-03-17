@@ -11,7 +11,7 @@ import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 //import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import AddIcon from "@material-ui/icons/Add";
-import { Avatar, Button } from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
 import "./navBar.css";
 import { AuthContext } from "../../contexts/auth-context";
 import { setAuthToken } from "../../setAuthTokenHeader";
@@ -34,7 +34,7 @@ const Navbar = () => {
   return (
     <div className="navBar">
       <Avatar src="/broken-image.jpg" className="avatar">
-        {User.display_name}
+        {User.display_name[0]}
       </Avatar>
       <NavLink
         activeOnlyWhenExact={true}
@@ -56,20 +56,9 @@ const Navbar = () => {
         to="/subscriptions"
       /> */}
       <NavLink page="My profile" Icon={PermIdentityIcon} to="/settings" />
-      <Button variant="text" onClick={logout}>
-        Log out
-      </Button>
+
       {/*  <NavLink page="More" Icon={MoreHorizIcon} to="more" /> */}
-      <Button
-        variant="text"
-        className="navBar-new-post"
-        fullWidth
-        startIcon={<AddIcon />}
-        component={Link}
-        to="/create-post"
-      >
-        new post
-      </Button>
+      <NavLink page="New Post" Icon={AddIcon} to="/create-post"></NavLink>
     </div>
   );
 };

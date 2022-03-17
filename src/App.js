@@ -55,7 +55,7 @@ const App = () => {
   return (
     <AuthProvider User={LoggedInUser} setLoginStatus={setLoginStatus}>
       <Router>
-        <div className="app">
+        <div className="wrapper">
           <Switch>
             <Route exact path="/">
               <LandingPage />

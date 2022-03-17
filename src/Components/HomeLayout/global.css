@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   /**  FONT AND LINK COLOURS *****************************************/
   --font-color: #666;
@@ -6,23 +11,78 @@ body {
   --link-hover-bg: #ebf5fe;
   --border-color: #d5dce2;
 
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue",
     "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: lighter;
+  font-size: 16px;
 }
 
-.app {
+.wrapper {
   display: flex;
-  max-width: 1300px;
-  margin: 0px auto 0px auto;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 720px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .content {
-  flex-direction: row;
+  flex-direction: column;
   display: flex;
-  flex: 0.8;
+  flex: 1 1 0%;
+  min-width: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+@media (max-width: 499px) {
+  .wrapper {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 499px) and (orientation: portrait) {
+  .wrapper {
+    padding-bottom: 57px;
+  }
+}
+
+@media (min-width: 500px) {
+  .container {
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 1003px) {
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 1004px) {
+  .container {
+    max-width: 1080px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1312px;
+  }
 }
